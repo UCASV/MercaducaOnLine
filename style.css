@@ -1,0 +1,32 @@
+body{
+    background-color: #f4f4f2;
+}
+nav{
+    background-color: #3f5b3b;
+    padding: 2px;
+}
+.navbar{
+    display:flex;
+    overflow-y: auto;
+    scrollbar-color: #67966170 #3f5b3b;
+    gap:20px;
+    padding: 10px;
+    
+}
+.elemento{
+    list-style:none;
+    color :#f4f4f2;
+    font-family:Helvetica;
+    font-weight: bold;
+    font-size: 17px;
+    text-align:center;
+    background-color: #5f945879;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    min-inline-size: 150px;
+    box-shadow: 2px 2px 5px #21551b42;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
