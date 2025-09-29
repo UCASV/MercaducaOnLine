@@ -1,9 +1,13 @@
 body{
     background-color: #f4f4f2;
+    margin:0;
+    padding:0;
 }
 nav{
+    opacity: 0.95;
     background-color: #3f5b3b;
     padding: 2px;
+    border-radius: 0 0 10px 10px;
 }
 .navbar{
     display:flex;
@@ -11,7 +15,6 @@ nav{
     scrollbar-color: #67966170 #3f5b3b;
     gap:20px;
     padding: 10px;
-    
 }
 .elemento{
     list-style:none;
@@ -25,8 +28,23 @@ nav{
     border-radius: 8px;
     cursor: pointer;
     min-inline-size: 150px;
-    box-shadow: 2px 2px 5px #21551b42;
+    box-shadow: -3px 2px -2px #194a1442;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(230deg, #4d814579 40%, #496d445e 90%);
+}
+
+.contenedorLogo{
+    background-color: #b0c8ad;
+    background: linear-gradient(90deg, #4d814579 50%, #214a1c5e 90%);
+    border-radius: 0 0 10px 10px;
+}
+.mercaducaLogoPrincipal{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
