@@ -1,57 +1,91 @@
-body{
-    background-color: #f4f4f2;
-    margin:0;
-    padding:0;
-}
-nav{
+body {
+  background-color: #f4f4f2;
+  margin: 0;
+  padding: 0;
+ width: 100%;
 
-    background-color: #3f5b3b;
-    padding: 2px;
-    border-radius: 0 0 10px 10px;
 }
-.navbar{
-    display:flex;
-    overflow-y: auto;
-    scrollbar-color: #67966170 #3f5b3b;
-    gap:20px;
-    padding: 10px;
-}
-.elemento{
-    opacity: 0.9;
-    list-style:none;
-    color :#f4f4f2;
-    font-family:Helvetica;
-    font-weight: bold;
-    font-size: 17px;
-    text-align:center;
-    background-color: #5f945879;
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    min-inline-size: 150px;
-    box-shadow: -3px 2px -2px #194a1442;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(to right, #476e44  , #5f9458a2 , #476e44 );
-}
+nav {
+  background-color: #3f5b3b;
+  padding: 2px;
+  border-radius: 0 0 10px 10px;
 
-.elemento:hover{
-    background-color: #698a65;
-    box-shadow: -5px 3px -5px #214a1c5e;
-    transition: 0.3s;
+}
+.navbar {
+  display: flex;
+  overflow-y: auto;
+  scrollbar-color: #67966170 #3f5b3b;
+  gap: 20px;
+  padding: 10px;
+}
+.elemento {
+  opacity: 0.9;
+  list-style: none;
+  color: #f4f4f2;
+  font-family: Helvetica;
+  font-weight: bold;
+  font-size: 17px;
+  text-align: center;
+  background-color: #5f945879;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-inline-size: 150px;
+  box-shadow: -3px 2px -2px #194a1442;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #476e44, #5f9458a2, #476e44);
 }
 
-.contenedorLogo{
-    background-color: #698a65;
-    background: linear-gradient(90deg, #4d814579 50%, #214a1c5e 90%);
-    border-radius: 0 0 10px 10px;
+.elemento:hover {
+  background-color: #698a65;
+  box-shadow: -5px 3px -5px #214a1c5e;
+  transition: 0.3s;
 }
-.mercaducaLogoPrincipal{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 20%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+
+.contenedorLogo {
+  background-color: #698a65;
+  background: linear-gradient(90deg, #4d814579 50%, #214a1c5e 90%);
+  border-radius: 0 0 10px 10px;
+}
+.mercaducaLogoPrincipal {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.contenedorPrincipal {
+  background-color: #f4f4f2;
+  overflow-y: scroll;
+  scrollbar-color: #698a65 #f4f4f2;
+}
+
+footer {
+  background-color: #3f5b3b;
+  height: fit-content;
+  width:98.45%;
+  padding: 10px;
+  font-family: Helvetica;
+  font-weight: bold;
+  font-size: 15px;
+  color: #f4f4f2;
+  font-style: none;
+  text-align: center;
+    position: absolute;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.link {
+  text-decoration: none;
+  color: #f4f4f2;
+}
+
+.icono {
+  width: 25px;
+  border-top: 5px;
 }
