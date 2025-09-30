@@ -9,13 +9,20 @@
     <div class="contenedorLogo"> 
     <nav>
       <ul class="navbar">
-        <li class="elemento" a href="#">Inicio</a></li>
-        <li class="elemento" a href="#">Eventos</a></li>
-        <li class="elemento" a href="#">Productos</a></li>
-        <li class="elemento" a href="#">Emprendimientos</a></li>
-        <li class="elemento" a href="#">Productos mas vendidos</a></li>
-        <li class="elemento" a href="#">Emprendimientos proximos</a></li>
-        <li class="elemento" a href="#">Contacto</a></li>
+        <!-- llevarlo a una zona de la pagina -->
+        <li class="elemento" id="inicio" a href="#" onclick="inicio()">Inicio</a></li>
+        <!-- otra pagina para eventos -->
+        <li class="elemento" id="eventos" a href="#" >Eventos</a></li>
+        <!-- otra pagina para productos -->
+        <li class="elemento" id="productos" a href="#" onclick="productos()">Productos</a></li>
+        <!-- llevarlo a una zona de la pagina -->
+        <li class="elemento" id="emprendimientos" a href="#" onclick="emprendimientos()">Emprendimientos</a></li>
+        <!-- llevarlo a una zona de la pagina -->
+        <li class="elemento" id="masVendidos" a href="#" onclick="masVendidos()">Productos más vendidos</a></li>
+        <!-- llevarlo a una zona de la pagina -->
+        <li class="elemento" id="proximos" a href="#" onclick="proximos()">Emprendimientos próximos</a></li>
+        <!-- contacto footer -->
+        <li class="elemento" id="contacto" a href="#" >Contacto</a></li>
       </ul>
     </nav>
     <section>
@@ -24,6 +31,13 @@
 
       <div class="contenedorPrincipal">
         <h1>Bienvenidos a Mercaduca On Line</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum non reprehenderit harum dicta quod odio officiis facere et natus earum. Aliquam quia, aliquid illo amet a quo exercitationem deserunt explicabo.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugiat id optio, maiores magnam asperiores distinctio labore. Assumenda modi, rerum ut, similique vero non officia, obcaecati facilis quo provident ipsum?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum non reprehenderit harum dicta quod odio officiis facere et natus earum. Aliquam quia, aliquid illo amet a quo exercitationem deserunt explicabo.
+        </p>
+        <div class="contenedorEmprendimientos"></div>
+        <div class="contenedorMasVendidos"></div>
+        <div class="contenedorProximos"></div>
       </div>
     </section>
     <footer>
