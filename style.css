@@ -4,7 +4,7 @@ body{
     padding:0;
 }
 nav{
-    opacity: 0.95;
+
     background-color: #3f5b3b;
     padding: 2px;
     border-radius: 0 0 10px 10px;
@@ -17,6 +17,7 @@ nav{
     padding: 10px;
 }
 .elemento{
+    opacity: 0.9;
     list-style:none;
     color :#f4f4f2;
     font-family:Helvetica;
@@ -32,11 +33,17 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(230deg, #4d814579 40%, #496d445e 90%);
+    background: linear-gradient(to right, #476e44  , #5f9458a2 , #476e44 );
+}
+
+.elemento:hover{
+    background-color: #698a65;
+    box-shadow: -5px 3px -5px #214a1c5e;
+    transition: 0.3s;
 }
 
 .contenedorLogo{
-    background-color: #b0c8ad;
+    background-color: #698a65;
     background: linear-gradient(90deg, #4d814579 50%, #214a1c5e 90%);
     border-radius: 0 0 10px 10px;
 }
