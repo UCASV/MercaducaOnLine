@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Funciones de barra de navegacion
     inicio(
+        
     );
     emprendimientos(
     );
