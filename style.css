@@ -35,15 +35,16 @@ nav .mercaducaLogonav {
   text-decoration: none;
   text-align: center;
   background-color: #49734479;
-  padding: 2px;
+  padding: 5px;
   border-radius: 8px;
   cursor: pointer;
-  min-inline-size: 100px;
+  min-inline-size: 160px;
   box-shadow: 3px 2px 2px #194a1442;
   display:flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(to right, #4f6f4b, #669e5fa2, #4f6f4b);
+  margin: 0 12px; /* top/bottom 0, left/right 12px */
 }
 
 .elemento a {
@@ -56,6 +57,9 @@ nav .mercaducaLogonav {
   text-decoration: none;
   padding: 10px 0;
   border-radius: 8px;
+  margin: 0 12px; /* top/bottom 0, left/right 12px */
+    text-decoration: none;
+  color: inherit;
 }
 
 .elemento:hover {
