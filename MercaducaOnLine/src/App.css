@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background-color: #f4f4f2;
+  background-color: #ecece5;
   margin: 0;
   padding: 0;
 }
@@ -15,23 +15,26 @@ nav {
   top: 0;
   z-index: 100;
   height: 70px;
-  box-shadow: 3px 2px 2px #194a1442;
+  box-shadow: 3px 2px 2px #00000042;
   display: flex;
   align-items:start;
+}
+::-webkit-scrollbar {
+    display: none;
 }
 
 nav .mercaducaLogonav {
   border: solid #f4f4f200;
   height: 38px;
-  margin-left: 0;
+  margin-left: 2px;
 }
 .navbar {
   display: flex;
   overflow-y: auto;
   scrollbar-color: #67966170 #3f5b3b00;
-  gap: 20px;
+  gap: 19px;
     margin-left: 2px;
-    margin-right: 1px;
+    margin-right: 8px;
     padding: 1px;
 }
 .elemento {
@@ -74,11 +77,10 @@ nav .mercaducaLogonav {
 }
 
 .contenedorLogo {
-  border-radius: 0 0 10px 10px;
   background-color: #698a65;
   background: linear-gradient(90deg, #4d814579 50%, #214a1c5e 90%);
   height: fit-content;
-  box-shadow: 2px 2px 3px #1a3b1742;
+  box-shadow: 2px 2px 3px #00000042;
 }
 .mercaducaLogoPrincipal {
   display: block;
@@ -90,7 +92,7 @@ nav .mercaducaLogonav {
 }
 
 .contenedorPrincipal {
-  background-color: #f4f4f2;
+  background-color: #ecece5;
 }
 
 footer {
