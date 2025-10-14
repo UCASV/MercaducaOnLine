@@ -1,0 +1,28 @@
+{
+  "name": "mercaducaonline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UCASV/MercaducaOnLine.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UCASV/MercaducaOnLine/issues"
+  },
+  "homepage": "https://github.com/UCASV/MercaducaOnLine#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.10"
+  },
+  "scripts": {
+  "dev": "concurrently \"npm run server\" \"npm run client\"",
+  "server": "nodemon backend/server.js",
+  "client": "npm start --prefix frontend"
+}
+
+}
