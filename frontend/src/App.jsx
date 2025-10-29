@@ -2,6 +2,7 @@ import { useState } from "react";
 import mercadoucapneg from "./img/mercaducaopng.png";
 import mercaducachiquitob from "./img/mercaducachiquitob.png";
 import instagram from "./img/instagram.png";
+import ProductsCarousel from "./components/ProductsCarousel.jsx";
 import "./App.css";
 
 function App() {
@@ -234,6 +235,7 @@ function App() {
               </div>
             </div>
           </section>
+          <ProductsCarousel />
           <footer id="footer">
             <h3>Contactanos</h3>
             <p>
