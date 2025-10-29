@@ -27,36 +27,49 @@ export default function ProductsCarousel() {
     const [selected, setSelected] = useState(null);
     const carouselRef = useRef(null);
 
-
-    useEffect(() => {
-      const fetchProductos = async () => {
-        try {
-          setLoading(true);
-          setError(null);
-          // Usa la URL completa del backend
-          const res = await axios.get('http://localhost:5000/productos');
-          console.log('Respuesta del servidor:', res.data);
-          
-          if (Array.isArray(res.data)) {
-            setProducts(res.data);
-          } else {
-            setError('La respuesta no es un array de productos');
-          }
-        } catch (err) {
-          console.error('Error detallado:', err);
-          setError(err.message || 'Error al conectar con el servidor');
-        } finally {
-          setLoading(false);
-        }
-      };
+useEffect(() => {
+  const fetchProductos = async () => {
+    try {
+      setLoading(true);
+      setError(null);
       
-      fetchProductos();
-    }, []);
-
-// export default function ProductsCarousel() {
-//     const [products] = useState(sampleProducts);
-//     const [selected, setSelected] = useState(null);
-//     const carouselRef = useRef(null);
+      // Using the same port as backend (5173)
+      const res = await axios.get('http://localhost:5050/productos', {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      console.log('Respuesta raw:', res);
+      
+      // Check if we have valid data
+      if (res.data && Array.isArray(res.data)) {
+        setProducts(res.data);
+      } else if (res.data && typeof res.data === 'object') {
+        // If data is nested in an object
+        const productos = res.data.data || res.data.productos;
+        if (Array.isArray(productos)) {
+          setProducts(productos);
+        } else {
+          throw new Error('Datos recibidos no son un array de productos');
+        }
+      } else {
+        throw new Error('Respuesta inválida del servidor');
+      }
+    } catch (err) {
+      console.error('Error detallado:', err);
+      setError(
+        err.response 
+          ? `Error del servidor: ${err.response.status} ${err.response.statusText}`
+          : `Error de conexión: ${err.message}`
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  fetchProductos();
+}, []);
 
     useEffect(() => {
         document.body.style.overflow = selected ? "hidden" : "";
@@ -75,7 +88,11 @@ export default function ProductsCarousel() {
 
 
             {loading && <div>Cargando productos...</div>}
-            {error && <div>Error al conectar con el servidor</div>}
+            {error && (
+            <div style={{color: 'red', padding: '10px'}}>
+                Error: {error.toString()}
+            </div>
+        )}
 
             <div id="contenedorUsuarios">
               {products.map(u => (

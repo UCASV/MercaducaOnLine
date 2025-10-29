@@ -24,26 +24,52 @@ const dbConfig = {
   user: "sa",
   password: "123456",
   server: "localhost",
-  database: "db_mercaduca"
+  database: "db_mercaduca",
+    port: 1433,               // ajustar si tu SQL usa otro puerto
+  options: {
+    encrypt: false,
+    trustServerCertificate: true
+  }
 };
 
-app.get('/productos' , async (req, res) =>{
+(async () => {
   try {
-    sql.connect(dbConfig)
-    const result = await sql .query`SELECT * FROM Producto`;
+    const pool = await sql.connect(dbConfig);
+    console.log('DB: conexión correcta');
+    await pool.close();
+  } catch (err) {
+    console.error('DB: fallo de conexión al arrancar:', err.message || err);
+  }
+})();
+
+app.get('/productos', async (req, res) => {
+  try {
+    const pool = await sql.connect(dbConfig);
+    console.log('Connected to database');
+    
+    const result = await pool.request()
+      .query('SELECT * FROM Producto');  // Make sure table name matches your DB
+    
+    console.log('Query result:', result);
     res.json(result.recordset);
   } catch (error) {
-    console.error("error: ", error);
-    res.status(500).send("ERROORRRRR")
-    alert('Error al conectar con el sql');
+    console.error('Database error:', error);
+    res.status(500).json({ 
+      error: 'Error al obtener productos',
+      details: error.message 
+    });
+  } finally {
+    try { 
+      await sql.close();
+    } catch(e) { /* ignore */ }
   }
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist'));
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
-const PORT = process.env.PORT || 5173;
+const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Backend corriendo en http://localhost:${PORT}`);
 });
