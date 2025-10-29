@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import axios from "axios";
 import "./ProductsCarousel.css";
 
 import img1 from "../img/F100031656.jpg";
@@ -17,10 +18,45 @@ const sampleProducts = [
     { id: 6, name: "Pan Casero", short_desc: "A la leña", long_desc: "Pan artesanal horneado en horno a leña, sabor tradicional.", price: 110.0, image: img6 },
 ];
 
+
+
 export default function ProductsCarousel() {
-    const [products] = useState(sampleProducts);
+    const [products, setProducts] = useState(sampleProducts);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [selected, setSelected] = useState(null);
     const carouselRef = useRef(null);
+
+
+    useEffect(() => {
+      const fetchProductos = async () => {
+        try {
+          setLoading(true);
+          setError(null);
+          // Usa la URL completa del backend
+          const res = await axios.get('http://localhost:5000/productos');
+          console.log('Respuesta del servidor:', res.data);
+          
+          if (Array.isArray(res.data)) {
+            setProducts(res.data);
+          } else {
+            setError('La respuesta no es un array de productos');
+          }
+        } catch (err) {
+          console.error('Error detallado:', err);
+          setError(err.message || 'Error al conectar con el servidor');
+        } finally {
+          setLoading(false);
+        }
+      };
+      
+      fetchProductos();
+    }, []);
+
+// export default function ProductsCarousel() {
+//     const [products] = useState(sampleProducts);
+//     const [selected, setSelected] = useState(null);
+//     const carouselRef = useRef(null);
 
     useEffect(() => {
         document.body.style.overflow = selected ? "hidden" : "";
@@ -36,7 +72,21 @@ export default function ProductsCarousel() {
 
     return (
         <>
-            <div className="products-section" id="productos">
+
+
+            {loading && <div>Cargando productos...</div>}
+            {error && <div>Error al conectar con el servidor</div>}
+
+            <div id="contenedorUsuarios">
+              {products.map(u => (
+                <div key={u.id} className="usuario-fila">
+                  <p>{u.id}</p>
+                  <p>{u.nombre ?? u.name}</p>
+                  <p>{u.id_categoria ?? u.category ?? ''}</p>
+                </div>
+              ))}
+            </div>
+              <div className="products-carousel">
                 <h2>Productos</h2>
                 <div className="carousel-wrapper">
                     <button className="arrow left" onClick={() => scrollByWidth(-1)} aria-label="Anterior">‹</button>
