@@ -1,10 +1,10 @@
 import "./Productos.css";
-import ProductsCarousel from "./ProductsCarousel.jsx";
+import ProductsGrid from "./ProductsGrid.jsx";
 
 export default function Productos() {
   return (
     <div >
-                <ProductsCarousel />
+                <ProductsGrid />
     </div>
   );
 }
