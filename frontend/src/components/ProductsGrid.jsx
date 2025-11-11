@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ProductsGrid.css";
 
-import img1 from "../img/2227.jpg";
-import img2 from "../img/Empanadas.jpg";
-import img3 from "../img/F100031656.jpg";
-import img4 from "../img/Galletas.jpeg";
-import img5 from "../img/images.jpeg";
-import img6 from "../img/mermeladafrutosrojos.jpg";
-import img7 from "../img/Pan.jpeg";
 import genericIcon from "../img/generic.png";
 
 export default function ProductsGrid() {
@@ -26,12 +19,15 @@ export default function ProductsGrid() {
     const [selectedCategory, setSelectedCategory] = useState("Todos");
     const [products, setProducts] = useState([]);
     const [expandedProduct, setExpandedProduct] = useState(null);
+    const [rating, setRating] = useState({});
+    const [userVotes, setUserVotes] = useState({});
+    const [hover, setHover] = useState(0);
 
     useEffect(() => {
 
         const sample = [
             // Jochips (Galletas)
-            { id: 1, brand: "Jochips", title: "Galletas Clásicas", categoria: "Alimentos y bebidas", price: "$2.50", img: img4 },
+            { id: 1, brand: "Jochips", title: "Galletas Clásicas", categoria: "Alimentos y bebidas", price: "$2.50", img: genericIcon },
             { id: 2, brand: "Jochips", title: "Galletas Premium", categoria: "Alimentos y bebidas", price: "$3.50", img: genericIcon },
 
             // Evy Fantasy (Joyas artesanales)
@@ -50,7 +46,7 @@ export default function ProductsGrid() {
             { id: 13, brand: "Meowfa", title: "Llaveros", categoria: "Productos artesanales", price: "$2.50", img: genericIcon },
 
             // Es De Café
-            { id: 14, brand: "Es De Café", title: "Café molido", categoria: "Alimentos y bebidas", price: "$6.00", img: img2 },
+            { id: 14, brand: "Es De Café", title: "Café molido", categoria: "Alimentos y bebidas", price: "$6.00", img: genericIcon },
             { id: 15, brand: "Es De Café", title: "Dulces de café", categoria: "Alimentos y bebidas", price: "$3.00", img: genericIcon },
             { id: 16, brand: "Es De Café", title: "Horchata de café", categoria: "Alimentos y bebidas", price: "$4.00", img: genericIcon },
             { id: 17, brand: "Es De Café", title: "Prensas francesas", categoria: "Hogar", price: "$18.00", img: genericIcon },
@@ -118,7 +114,30 @@ export default function ProductsGrid() {
         ];
         setProducts(sample);
 
+        const sampleRatings = {
+            1: [5, 4, 4, 5],
+            2: [4, 4, 5],
+            14: [5, 5, 5, 4, 5],
+            23: [3.5, 4]
+        };
+        setRating(sampleRatings);
     }, []);
+
+    function getRatingInfo(productId) {
+        const arr = rating[productId] || [];
+        if (arr.length === 0) return { avg: 0, count: 0 };
+        const sum = arr.reduce((s, v) => s + v, 0);
+        return { avg: sum / arr.length, count: arr.length };
+    }
+
+    function submitRating(productId, value) {
+        setRating(prev => {
+            const next = { ...prev, [productId]: [...(prev[productId] || []), value] };
+            return next;
+        });
+        setUserVotes(prev => ({ ...prev, [productId]: value }));
+        setHover(0);
+    }
 
     const filtered = selectedCategory === "Todos"
         ? products
@@ -126,6 +145,7 @@ export default function ProductsGrid() {
 
     function openExpanded(p) {
         setExpandedProduct(p);
+        setHover(0);
     }
     function closeExpanded() {
         setExpandedProduct(null);
@@ -151,7 +171,7 @@ export default function ProductsGrid() {
                     >
                         ← Inicio
                     </button>
-                <h1 className="pg-header-title">Productos</h1>
+                    <h1 className="pg-header-title">Productos</h1>
                 </div>
             </header>
 
@@ -167,7 +187,6 @@ export default function ProductsGrid() {
                             aria-selected={name === selectedCategory}
                         >
                             <span className="cat-circle" aria-hidden="true">
-                                {/* si c tiene icon muestra la imagen; si no, muestra la primera letra */}
                                 {typeof c === "object" && c.icon ? (
                                     <img src={c.icon} alt={name} className="cat-icon" />
                                 ) : (
@@ -224,10 +243,44 @@ export default function ProductsGrid() {
                             <small className="brand">{expandedProduct.brand}</small>
                             <h3 className="title">{expandedProduct.title}</h3>
                             <div className="price">{expandedProduct.price}</div>
+
                             <p className="description">Aquí irá la descripción completa, opciones, stock y más detalles.</p>
 
+                            <div className="rating-block" onClick={(e) => e.stopPropagation()}>
+                                {(() => {
+                                    const { avg, count } = getRatingInfo(expandedProduct.id);
+                                    const avgRound = Math.round(avg);
+                                    const userVote = userVotes[expandedProduct.id] || 0;
+                                    const display = hover || userVote || avgRound;
+
+                                    return (
+                                        <div className="rating-row" aria-label={`Puntuación promedio ${avg.toFixed(1)} de 5`}>
+                                            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                                                <div className="stars-input" aria-label="Puntuación del producto">
+                                                    {[1, 2, 3, 4, 5].map(i => (
+                                                        <button
+                                                            key={i}
+                                                            className="star-btn"
+                                                            title={`Votar ${i} estrellas`}
+                                                            onMouseEnter={() => setHover(i)}
+                                                            onMouseLeave={() => setHover(0)}
+                                                            onClick={() => { submitRating(expandedProduct.id, i); }}
+                                                            aria-label={`Votar ${i} estrellas`}
+                                                        >
+                                                            <span className={`star ${i <= display ? "filled" : ""}`}>★</span>
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                                <div className="avg-number" style={{ fontSize: 13, color: "#444" }}>
+                                                    {count > 0 ? `${avg.toFixed(1)} / 5 (${count})` : "Sin puntuaciones"}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })()}
+                            </div>
                             <div className="actions">
-                                <button className="btn-primary" onClick={() => { /* agregar al carrito */ }}>Mas informacion</button>
+                                <button className="btn-primary" onClick={() => { /* informacion emprendedor */ }}>Mas informacion</button>
                                 <button className="btn-secondary" onClick={closeExpanded}>Cerrar</button>
                             </div>
                         </div>

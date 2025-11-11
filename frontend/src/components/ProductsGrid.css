@@ -33,12 +33,15 @@
   padding: 6px 8px;
   border-radius: 6px;
 }
+
 .back-btn:hover {
   background: rgba(184, 0, 0, 0.06);
 }
 
 @media (max-width: 700px) {
-  .pg-header-title { font-size: 20px; }
+  .pg-header-title {
+    font-size: 20px;
+  }
 }
 
 .categories-row {
@@ -254,6 +257,69 @@
   cursor: pointer;
 }
 
+.rating-block {
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars-display {
+  display: flex;
+  gap: 4px;
+  font-size: 20px;
+}
+
+.star {
+  color: #ddd;
+}
+
+.star.filled {
+  color: #ffb400;
+}
+
+.rating-submit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars-input {
+  display: flex;
+  gap: 6px;
+}
+
+.star-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ddd;
+}
+
+.star-btn .star {
+  pointer-events: none;
+}
+
+.star-btn:hover .star,
+.star-btn:focus .star {
+  color: #ffb400;
+  outline: none;
+}
+
+.star-btn:focus {
+  outline: 2px solid rgba(184, 0, 0, 0.16);
+  border-radius: 4px;
+}
+
+
 @media (max-width: 860px) {
   .pg-expanded-card {
     flex-direction: column;
@@ -270,6 +336,7 @@
   .cat-btn {
     width: 90px;
   }
+
   .pg-header-title {
     position: static;
     transform: none;
