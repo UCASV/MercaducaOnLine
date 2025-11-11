@@ -48,7 +48,7 @@ app.get('/productos', async (req, res) => {
     console.log('Connected to database');
     
     const result = await pool.request()
-      .query('SELECT * FROM Producto');  // Make sure table name matches your DB
+      .query('SELECT * FROM Producto AS p JOIN EmprendimientoxProducto AS ep ON p.id = ep.id_producto JOIN Imagen AS i ON i.id = ep.id_imagen');  // Make sure table name matches your DB
     
     console.log('Query result:', result);
     res.json(result.recordset);
@@ -64,6 +64,38 @@ app.get('/productos', async (req, res) => {
     } catch(e) { /* ignore */ }
   }
 });
+
+app.get('/productosMasVendidos', async (req, res) => {
+  try {
+    const pool = await sql.connect(dbConfig);
+    console.log('Connected to database');
+    
+    const result = await pool.request()
+      .query(`SELECT * FROM Producto AS p 
+                JOIN EmprendimientoxProducto AS ep 
+                  ON p.id = ep.id_producto 
+                JOIN Imagen AS i 
+                  ON i.id = ep.id_imagen 
+                JOIN ProductosMasVendidos AS pv 
+                  ON pv.id_producto = p.id 
+                JOIN Categoria AS c 
+                  ON C.id = P.id_categoria`);  // Make sure table name matches your DB
+    
+    console.log('Query result:', result);
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ 
+      error: 'Error al obtener productos',
+      details: error.message 
+    });
+  } finally {
+    try { 
+      await sql.close();
+    } catch(e) { /* ignore */ }
+  }
+});
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));

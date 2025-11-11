@@ -34,7 +34,7 @@ useEffect(() => {
       setError(null);
       
       // Using the same port as backend (5173)
-      const res = await axios.get('http://localhost:5050/productos', {
+      const res = await axios.get('http://localhost:5050/productosMasVendidos', {
         headers: {
           'Accept': 'application/json'
         }
@@ -86,7 +86,7 @@ useEffect(() => {
     return (
         <>
 
-
+{/* 
             {loading && <div>Cargando productos...</div>}
             {error && (
             <div style={{color: 'red', padding: '10px'}}>
@@ -102,19 +102,19 @@ useEffect(() => {
                   <p>{u.id_categoria ?? u.category ?? ''}</p>
                 </div>
               ))}
-            </div>
+            </div> */}
               <div className="products-carousel">
                 <h2>Productos</h2>
                 <div className="carousel-wrapper">
                     <button className="arrow left" onClick={() => scrollByWidth(-1)} aria-label="Anterior">‹</button>
                     <div className="carousel" ref={carouselRef}>
-                        {products.map(p => (
-                            <article key={p.id} className="card" onClick={() => setSelected(p)} tabIndex={0} role="button">
-                                <div className="card-img"><img src={p.image} alt={p.name} /></div>
+                        {products.map(u => (
+                            <article key={u.id} className="card" onClick={() => setSelected(u)} tabIndex={0} role="button">
+                                <div className="card-img"><img src={u.id_imagen} alt={u.nombre} /></div>
                                 <div className="card-body">
-                                    <h3>{p.name}</h3>
-                                    <p className="short">{p.short_desc}</p>
-                                    <div className="price">${p.price}</div>
+                                    <h3>{u.nombre}</h3>
+                                    <p className="short">{u.descripcion}</p>
+                                    <div className="price">${u.precio}</div>
                                 </div>
                             </article>
                         ))}
