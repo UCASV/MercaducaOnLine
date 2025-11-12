@@ -1,7 +1,8 @@
-const express = require("express");
-const path = require("path");
-const cors = require("cors");
-const sql = require("mssql");
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import sql from 'mssql';
+import { fileURLToPath } from 'url';
 
 const app = express();
 app.use(cors());
@@ -9,15 +10,12 @@ app.use(express.json());
 
 app.get("/api/test", (req, res) => res.json({ ok: true }));
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use('/Imagenes', express.static(path.join(__dirname, 'Imagenes')));
+
 // --- Servir frontend Vite ---
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-
-// Escuchar en un puerto libre
-// const server = app.listen(0, () => {
-//   const PORT = server.address().port;
-//   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-// });
 
 
 const dbConfig = {
