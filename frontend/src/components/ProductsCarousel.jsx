@@ -15,14 +15,13 @@ useEffect(() => {
       setLoading(true);
       setError(null);
       
-      // Using the same port as backend (5173)
       const res = await axios.get('http://localhost:5050/productos', {
         headers: {
           'Accept': 'application/json'
         }
       });
       
-      //console.log('Respuesta raw:', res);
+      console.log('Respuesta raw:', res);
       
       // Check if we have valid data
       if (res.data && Array.isArray(res.data)) {
