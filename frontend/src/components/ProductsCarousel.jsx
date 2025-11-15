@@ -67,7 +67,7 @@ useEffect(() => {
     return (
         <>
               <div className="products-carousel">
-                <h2>Productos</h2>
+                <h2>Productos mas vendidos por categoria</h2>
                 <div className="carousel-wrapper">
                     <button className="arrow left" onClick={() => scrollByWidth(-1)} aria-label="Anterior"></button>
                     <div className="carousel" ref={carouselRef}>
