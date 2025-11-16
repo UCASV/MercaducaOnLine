@@ -127,6 +127,7 @@
   cursor: pointer;
   transition: transform 160ms ease, box-shadow 160ms ease;
   width: 100%;
+  height: 220px;
 }
 
 .product-card:focus {
@@ -341,4 +342,20 @@
     position: static;
     transform: none;
   }
+}
+
+.ImagenesProducto{
+    width: 200px;
+    height: 400px;
+    object-fit: cover;    /* <- evita que se expanda, recorta */
+};
+
+.ImagenesProducto img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* <- evita que se expanda, recorta */
+};
+
+.ImagenesProducto:hover img {
+    transform: scale(1.1);   /* <--- ZOOM SIN EXPANDIR EL CARD */
 }
