@@ -29,20 +29,34 @@ export const Categorias = async (req, res) => {
 
 export const MasVendidoPorCategoria = async (req, res) => {
   try {
-    db.query(`SELECT TOP 1 (p.nombre), c.nombre
-              FROM ProductoMasVendido AS pm
-              JOIN EmprendimientoxProducto AS ep
-                ON pm.id_empxprod = ep.id
-              JOIN Producto AS p
-                ON p.id = ep.id_producto
-              JOIN Categoria AS c
-                ON c.id = p.id_categoria
-              JOIN Imagen AS i
-                ON i.id = ep.id_imagen
-              JOIN Emprendimiento AS e
-                ON e.id = ep.id_emprendimiento
+    const pool = await sql.connect(db);
 
-              WHERE c.nombre = @categoria`);
+    const categoria = req.params.categoria;
+
+    const result = await pool.request()
+      .input("categoria", sql.VarChar, categoria)
+      .query(`
+        SELECT TOP 1 
+            p.id AS id_producto,
+            p.nombre AS nombre_producto,
+            p.id_categoria,
+            ep.id_emprendimiento,
+            ep.precio,
+            ep.descripcion,
+            ep.PuntajeProm,
+            e.nombre AS nombre_emprendimiento,
+            e.estado,
+            c.nombre AS categoria,
+            i.id AS id_imagen,
+            i.codigo_imagen
+        FROM ProductoMasVendido pm
+        JOIN EmprendimientoxProducto ep ON pm.id_empxprod = ep.id
+        JOIN Producto p ON p.id = ep.id_producto
+        JOIN Categoria c ON c.id = p.id_categoria
+        JOIN Imagen i ON i.id = ep.id_imagen
+        JOIN Emprendimiento e ON e.id = ep.id_emprendimiento
+        WHERE c.nombre = @categoria;
+      `);
 
     res.json(result.recordset);
   } catch (error) {
@@ -52,8 +66,6 @@ export const MasVendidoPorCategoria = async (req, res) => {
       details: error.message,
     });
   } finally {
-    try {
-      await sql.close();
-    } catch {}
+    try { await sql.close(); } catch {}
   }
 };
