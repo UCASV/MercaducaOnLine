@@ -73,9 +73,9 @@ useEffect(() => {
                     <div className="carousel" ref={carouselRef}>
                             {products.map(u => (
                             <article key={u.id} className="card" onClick={() => setSelected(u)} tabIndex={0} role="button">
-                                <div className="card-img"><img src={`http://localhost:5050/Imagenes/${u.codigo_imagen}`} alt={u.nombre} /></div>
+                                <div className="card-img"><img src={`http://localhost:5050/Imagenes/${u.codigo_imagen}`} alt={u.nombre_producto} /></div>
                                 <div className="card-body">
-                                    <h3>{u.nombre}</h3>
+                                    <h3>{u.nombre_producto}</h3>
                                     <p className="short">{u.descripcion}</p>
                                     <div className="price">${u.precio}</div>
                                 </div>
@@ -90,7 +90,7 @@ useEffect(() => {
                 <div className="overlay" onClick={() => setSelected(null)}>
                     <div className="modal" onClick={(e) => e.stopPropagation()}>
                         <button className="close" onClick={() => setSelected(null)}>✕</button>
-                        <div className="modal-img"><img src={`http://localhost:5050/Imagenes/${selected.codigo_imagen}`} alt={selected.nombre} /></div>
+                        <div className="modal-img"><img src={`http://localhost:5050/Imagenes/${selected.codigo_imagen}`} alt={selected.nombre_producto} /></div>
                         <div className="modal-body">
                             <h2>{selected.nombre}</h2>
                             <p className="long-desc">{selected.descripcion}</p>
