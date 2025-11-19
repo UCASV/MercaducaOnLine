@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 import "./ProductsGrid.css";
 
-import genericIcon from "../img/generic.png";
 
 export default function ProductsGrid() {
     const navigate = useNavigate();
@@ -135,7 +134,6 @@ useEffect(() => {
         setHover(0);
     }
 
-// --- DEFINICIÓN "defensiva" DE filtered ---
 const safeProducts = Array.isArray(products) ? products : [];
 const filtered = selectedCategory === "Todos"
   ? safeProducts
@@ -173,11 +171,11 @@ return (
             </div>
         </header>
 
-        {/* === CATEGORÍAS === */}
+        {/* === CATEGORIAS === */}
         <div className="categories-row" role="tablist" aria-label="Categorías">
             {categories.map((c) => (
                 <button
-                    key={c.id}   // CORRECTO
+                    key={c.id}
                     className={`cat-btn ${c.nombre === selectedCategory ? "active" : ""}`}
                     onClick={() => setSelectedCategory(c.nombre)}
                     role="tab"
@@ -192,7 +190,6 @@ return (
                     </span>
 
                     <small className="cat-label">{c.nombre}</small> 
-                    {/* CORREGIDO: antes usabas nombre_producto */}
                 </button>
             ))}
         </div>
@@ -266,7 +263,7 @@ return (
 
                                     return (
                                         <div className="rating-row" aria-label={`Puntuación promedio ${avg.toFixed(1)} de 5`}>
-                                            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                                            <div className="rating-div">
                                                 <div className="stars-input" aria-label="Puntuación del producto">
                                                     {[1, 2, 3, 4, 5].map(i => (
                                                         <button
@@ -282,7 +279,7 @@ return (
                                                         </button>
                                                     ))}
                                                 </div>
-                                                <div className="avg-number" style={{ fontSize: 13, color: "#444" }}>
+                                                <div className="avg-number" >
                                                     {count > 0 ? `${avg.toFixed(1)} / 5 (${count})` : "Sin puntuaciones"}
                                                 </div>
                                             </div>

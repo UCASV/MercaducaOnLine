@@ -1,13 +1,13 @@
-import { db } from '../connection/data.js'
-import sql from 'mssql';
+import { pool, poolConnect, sql } from '../connection/data.js'
 
 export const Productos = async (req, res) => {
   try {
-    const pool = await sql.connect(db);
+    await poolConnect; // asegura que el pool está conectado
     console.log('Connected to database');
     
-    const result = await pool.request()
-      .query(`
+    const request = pool.request();
+
+    const result = await request.query(`
         SELECT 
             p.id AS id_producto,
             p.nombre AS nombre_producto,
@@ -16,6 +16,8 @@ export const Productos = async (req, res) => {
             ep.id_emprendimiento,
             ep.precio,
             ep.descripcion,
+            ep.id AS id_empxprod,
+            ep.PuntajeProm,
 
             e.nombre AS nombre_emprendimiento,
 
@@ -39,16 +41,15 @@ export const Productos = async (req, res) => {
       details: error.message 
     });
   } finally {
-    try { await sql.close(); } catch {}
   }
 };
 
 export const ProductosCategoria = async (req, res) => {
   try {
-    const pool = await sql.connect(db);
-    console.log('Connected to database');
+    await poolConnect;
+    const request = pool.request();
 
-    const result = await pool.request()
+    const result = await request
       .input("categoria", sql.VarChar, req.params.categoria)
       .query(`
         SELECT 
@@ -59,6 +60,8 @@ export const ProductosCategoria = async (req, res) => {
             ep.id_emprendimiento,
             ep.precio,
             ep.descripcion,
+            ep.PuntajeProm,
+            ep.id AS id_empxprod,
 
             e.nombre AS nombre_emprendimiento,
 
@@ -81,10 +84,9 @@ export const ProductosCategoria = async (req, res) => {
   } catch (error) {
     console.error('Database error:', error);
     res.status(500).json({ 
-      error: 'Error al obtener productos',
+      error: 'Error al obtener productos por categoría',
       details: error.message 
     });
   } finally {
-    try { await sql.close(); } catch {}
   }
 };

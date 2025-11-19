@@ -359,3 +359,14 @@
 .ImagenesProducto:hover img {
     transform: scale(1.1);   /* <--- ZOOM SIN EXPANDIR EL CARD */
 }
+
+.rating-row .rating-div{
+  display: flex;
+  align-items: center;
+  gap: 12;
+}
+
+.avg-number{
+  font-size: 13;
+  color: #444
+}

@@ -1,51 +1,50 @@
-import { db } from "../connection/data.js";
-import sql from "mssql";
+import { pool, sql, poolConnect } from "../connection/data.js";
+
 
 export const Categorias = async (req, res) => {
   try {
-    const pool = await sql.connect(db);
-    console.log("Connected to database");
+    await poolConnect;
+    const request = pool.request();
 
-    const result = await pool.request().query(`
-        SELECT * 
-        FROM Categoria`); // Make sure table name matches your DB
+    const result = await request.query(`
+      SELECT * 
+      FROM Categoria;
+    `);
 
-    console.log("Query result:", result);
     res.json(result.recordset);
+
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({
-      error: "Error al obtener productos",
+      error: "Error al obtener categorías",
       details: error.message,
     });
-  } finally {
-    try {
-      await sql.close();
-    } catch (e) {
-      /* ignore */
-    }
   }
 };
 
 export const MasVendidoPorCategoria = async (req, res) => {
   try {
-    const pool = await sql.connect(db);
-
+    await poolConnect;
     const categoria = req.params.categoria;
-
-    const result = await pool.request()
+    const request = pool.request();
+    const result = await request
       .input("categoria", sql.VarChar, categoria)
       .query(`
         SELECT TOP 1 
             p.id AS id_producto,
             p.nombre AS nombre_producto,
             p.id_categoria,
+
             ep.id_emprendimiento,
             ep.precio,
             ep.descripcion,
             ep.PuntajeProm,
+            ep.id AS id_empxprod,
+            ep.votos,
+
             e.nombre AS nombre_emprendimiento,
             e.estado,
+
             c.nombre AS categoria,
             i.id AS id_imagen,
             i.codigo_imagen
@@ -59,13 +58,12 @@ export const MasVendidoPorCategoria = async (req, res) => {
       `);
 
     res.json(result.recordset);
+
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({
       error: "Error al obtener productos",
       details: error.message,
     });
-  } finally {
-    try { await sql.close(); } catch {}
   }
 };

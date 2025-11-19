@@ -199,3 +199,15 @@
         height: 260px;
     }
 }
+
+.avg-number{
+    font-size: 13;
+    color: #444;
+}
+
+.rating-row .rating{
+    display: flex;
+    align-items: "center";
+    gap: 12;
+}
+                        
