@@ -100,7 +100,7 @@ export default function ProductsCarousel() {
                 </div>
                 <div className="card-body">
                   <h3>{u.nombre_producto}</h3>
-                  <p className="short">{u.categoria}</p>
+                  <p className="categoria">{u.categoria}</p>
                   <p className="short">{u.descripcion}</p>
                   <p className="short">{u.PuntajeProm}</p>
                   <div className="price">${u.precio}</div>
