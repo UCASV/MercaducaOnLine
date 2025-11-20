@@ -92,13 +92,6 @@ export default function ProductsCarousel() {
     el.scrollBy({ left: el.clientWidth * dir, behavior: "smooth" });
   };
 
-  function getRatingInfo(productId) {
-    const arr = rating[productId] || [];
-    if (arr.length === 0) return { avg: 0, count: 0 };
-    const sum = arr.reduce((s, v) => s + v, 0);
-    return { avg: sum / arr.length, count: arr.length };
-  }
-
 async function submitRating(productId, value) {
   try {
     // Llamada al backend que recalcula PuntajeProm y total de votos
@@ -206,7 +199,7 @@ async function submitRating(productId, value) {
 
         <div className="rating-block" onClick={(e) => e.stopPropagation()}>
   {(() => {
-    // Promedio y conteo vienen de las propiedades correctas
+    // Promedio y conteo 
     const avg = selected.PuntajeProm ?? 0;
     const count = selected.votos ?? 0;
 
@@ -225,6 +218,7 @@ async function submitRating(productId, value) {
                 onMouseEnter={() => setHover(i)}
                 onMouseLeave={() => setHover(0)}
                 onClick={() => submitRating(selected.id_empxprod, i)}
+                
               >
                 <span className={`star ${i <= display ? "filled" : ""}`}>★</span>
               </button>

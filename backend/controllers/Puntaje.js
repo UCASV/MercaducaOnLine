@@ -6,65 +6,75 @@ export const ActualizarPromedio = async (req, res) => {
   try {
     await poolConnect;
 
-    // Obtener el producto y su promedio actual
+    // 1) Obtener el producto
     const prodQuery = await pool.request()
       .input("id_empxprod", sql.Int, id_empxprod)
       .query(`
-        SELECT id_emprendimiento, PuntajeProm, votos
+        SELECT id_emprendimiento
         FROM EmprendimientoxProducto
         WHERE id = @id_empxprod;
       `);
 
-    if (prodQuery.recordset.length === 0) {
+    if (prodQuery.recordset.length === 0)
       return res.status(404).json({ error: "Producto no encontrado" });
-    }
 
-    const producto = prodQuery.recordset[0];
-    const id_emp = producto.id_emprendimiento;
+    const id_emp = prodQuery.recordset[0].id_emprendimiento;
 
-    //Calcular nuevo promedio del producto
-    const nuevoPromedioProducto = producto.PuntajeProm && producto.votos
-      ? (producto.PuntajeProm * producto.votos + voto) / (producto.votos + 1)
-      : voto;
-
-    const nuevosVotos = (producto.votos || 0) + 1;
-
-    //Actualizar el producto
+    // 2) Guardar voto individual
     await pool.request()
       .input("id_empxprod", sql.Int, id_empxprod)
-      .input("promedio", sql.Float, nuevoPromedioProducto)
-      .input("votos", sql.Int, nuevosVotos)
+      .input("voto", sql.Int, voto)
+      .query(`
+        INSERT INTO Puntaje (id_emp, puntaje)
+        VALUES (@id_empxprod, @voto);
+      `);
+
+    // 3) Recalcular promedio del producto
+    const promedioProd = await pool.request()
+      .input("id_empxprod", sql.Int, id_empxprod)
+      .query(`
+        SELECT AVG(puntaje) AS prom, COUNT(*) AS votos
+        FROM Puntaje
+        WHERE id_emp = @id_empxprod;
+      `);
+
+    const promProd = promedioProd.recordset[0].prom;
+    const votosProd = promedioProd.recordset[0].votos;
+
+    await pool.request()
+      .input("id_empxprod", sql.Int, id_empxprod)
+      .input("prom", sql.Float, promProd)
+      .input("votos", sql.Int, votosProd)
       .query(`
         UPDATE EmprendimientoxProducto
-        SET PuntajeProm = @promedio, votos = @votos
+        SET PuntajeProm = @prom, votos = @votos
         WHERE id = @id_empxprod;
       `);
 
-    //Calcular promedio del emprendimiento (promedio de todos sus productos)
-    const promedioEmpQuery = await pool.request()
+    // 4) Recalcular promedio del emprendimiento
+    const promedioEmp = await pool.request()
       .input("id_emp", sql.Int, id_emp)
       .query(`
-        SELECT AVG(PuntajeProm) AS promedio_emprendimiento
+        SELECT AVG(PuntajeProm) AS prom
         FROM EmprendimientoxProducto
         WHERE id_emprendimiento = @id_emp;
       `);
 
-    const promedioEmprendimiento = promedioEmpQuery.recordset[0].promedio_emprendimiento;
+    const promEmp = promedioEmp.recordset[0].prom;
 
-    //Guardar promedio final en la tabla Puntaje
     await pool.request()
       .input("id_emp", sql.Int, id_emp)
-      .input("promedio", sql.Float, promedioEmprendimiento)
+      .input("prom", sql.Float, promEmp)
       .query(`
-        UPDATE Puntaje
-        SET puntaje = @promedio
-        WHERE id_emp = @id_emp;
+        UPDATE Emprendimiento
+        SET PuntajeProm = @prom
+        WHERE id = @id_emp;
       `);
 
-    return res.json({ 
-      promedioProducto: nuevoPromedioProducto,
-      promedioEmprendimiento,
-      totalVotosProducto: nuevosVotos
+    return res.json({
+      promedioProducto: promProd,
+      totalVotosProducto: votosProd,
+      promedioEmprendimiento: promEmp
     });
 
   } catch (err) {

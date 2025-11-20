@@ -147,13 +147,54 @@ const filtered = selectedCategory === "Todos"
         setExpandedProduct(null);
     }
 
-    useEffect(() => {
-        if (expandedProduct) {
-            const prev = document.body.style.overflow;
-            document.body.style.overflow = "hidden";
-            return () => { document.body.style.overflow = prev; };
-        }
-    }, [expandedProduct]);
+  useEffect(() => {
+    if (expandedProduct) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [expandedProduct]);
+
+    async function submitRating(productId, value) {
+  try {
+    // Llamada al backend que recalcula PuntajeProm y total de votos
+    const res = await axios.post("http://localhost:5050/actualizarPromedio", {
+      id_empxprod: productId,
+      voto: value
+    });
+
+    const { promedioProducto, promedioEmprendimiento, totalVotosProducto } = res.data;
+
+    // Actualizar rating local del producto
+    setRating(prev => ({
+      ...prev,
+      [productId]: promedioProducto // guardamos solo el promedio actual
+    }));
+
+    // Guardar voto del usuario para resaltar estrella
+    setUserVotes(prev => ({
+      ...prev,
+      [productId]: value
+    }));
+
+    setHover(0);
+
+    // Actualizar objeto seleccionado con los datos reales del backend
+    if (expandedProduct && expandedProduct.id_empxprod === productId) {
+      setExpandedProduct(prev => ({
+        ...prev,
+        PuntajeProm: promedioProducto,
+        votos: totalVotosProducto // <-- aquí usamos el total real de votos
+      }));
+    }
+
+  } catch (err) {
+    console.error("Error al enviar voto:", err);
+  }
+}
+
 
 return (
     <section className="products-grid-section">
@@ -198,7 +239,7 @@ return (
         <div className="products-grid-main" aria-live="polite">
             {filtered.map((p) => (
                 <article
-                    key={`${p.id_producto}-${p.id_emprendimiento}-${p.id_imagen}`} // CORRECTO
+                    key={p.id_empxprod}
                     className="product-card grid-card"
                     onClick={() => openExpanded(p)}
                     tabIndex={0}
@@ -256,9 +297,12 @@ return (
 
                             <div className="rating-block" onClick={(e) => e.stopPropagation()}>
                                 {(() => {
-                                    const { avg, count } = getRatingInfo(expandedProduct.id);
+                                    const avg = expandedProduct.PuntajeProm ? Number(expandedProduct.PuntajeProm) : 0;
+                                    const count = expandedProduct.votos ? Number(expandedProduct.votos) : 0;
+
+                                    
                                     const avgRound = Math.round(avg);
-                                    const userVote = userVotes[expandedProduct.id] || 0;
+                                    const userVote = userVotes[expandedProduct.id_empxprod] || 0;
                                     const display = hover || userVote || avgRound;
 
                                     return (
@@ -272,15 +316,16 @@ return (
                                                             title={`Votar ${i} estrellas`}
                                                             onMouseEnter={() => setHover(i)}
                                                             onMouseLeave={() => setHover(0)}
-                                                            onClick={() => { submitRating(expandedProduct.id, i); }}
-                                                            aria-label={`Votar ${i} estrellas`}
+                                                            onClick={() => { submitRating(expandedProduct.id_empxprod, i); }}
+                                                            // aria-label={`Votar ${i} estrellas`}
                                                         >
                                                             <span className={`star ${i <= display ? "filled" : ""}`}>★</span>
                                                         </button>
                                                     ))}
                                                 </div>
                                                 <div className="avg-number" >
-                                                    {count > 0 ? `${avg.toFixed(1)} / 5 (${count})` : "Sin puntuaciones"}
+                                                    {count > 0 
+                                                    ? `${avg.toFixed(1)} / 5 (${count})` : "Sin puntuaciones"}
                                                 </div>
                                             </div>
                                         </div>

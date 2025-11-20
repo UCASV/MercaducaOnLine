@@ -18,6 +18,7 @@ export const Productos = async (req, res) => {
             ep.descripcion,
             ep.id AS id_empxprod,
             ep.PuntajeProm,
+            ep.votos,
 
             e.nombre AS nombre_emprendimiento,
 
@@ -62,6 +63,7 @@ export const ProductosCategoria = async (req, res) => {
             ep.descripcion,
             ep.PuntajeProm,
             ep.id AS id_empxprod,
+            ep.votos,
 
             e.nombre AS nombre_emprendimiento,
 
