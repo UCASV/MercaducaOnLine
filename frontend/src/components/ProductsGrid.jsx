@@ -3,7 +3,7 @@ import axios from "axios"
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-import "./ProductsGrid.css";
+import styles from  "./ProductsGrid.module.css";
 
 
 export default function ProductsGrid() {
@@ -197,149 +197,153 @@ const filtered = selectedCategory === "Todos"
 
 
 return (
-    <section className="products-grid-section">
-        <header className="pg-page-header">
-            <div className="pg-header-inner">
-                <button
-                    type="button"
-                    className="back-btn"
-                    onClick={() => window.history.back()}
-                    aria-label="Pagina principal"
-                >
-                    ← Inicio
-                </button>
-                <h1 className="pg-header-title">Productos</h1>
-            </div>
-        </header>
+   <section className={styles["products-grid-section"]}>
+  <header className={styles["pg-page-header"]}>
+    <div className={styles["pg-header-inner"]}>
+      <button
+        type="button"
+        className={styles["back-btn"]}
+        onClick={() => window.history.back()}
+        aria-label="Pagina principal"
+      >
+        ← Inicio
+      </button>
+      <h1 className={styles["pg-header-title"]}>Productos</h1>
+    </div>
+  </header>
 
-        {/* === CATEGORIAS === */}
-        <div className="categories-row" role="tablist" aria-label="Categorías">
-            {categories.map((c) => (
-                <button
-                    key={c.id}
-                    className={`cat-btn ${c.nombre === selectedCategory ? "active" : ""}`}
-                    onClick={() => setSelectedCategory(c.nombre)}
-                    role="tab"
-                    aria-selected={c.nombre === selectedCategory}
-                >
-                    <span className="cat-circle" aria-hidden="true">
-                        <img
-                            src={`../../Iconos/${c.nombre}.png`}
-                            alt={c.nombre}
-                            className="cat-icon"
-                        />
-                    </span>
+  {/* === CATEGORIAS === */}
+  <div className={styles["categories-row"]} role="tablist" aria-label="Categorías">
+    {categories.map((c) => (
+      <button
+        key={c.id}
+        className={`${styles["cat-btn"]} ${c.nombre === selectedCategory ? styles.active : ""}`}
+        onClick={() => setSelectedCategory(c.nombre)}
+        role="tab"
+        aria-selected={c.nombre === selectedCategory}
+      >
+        <span className={styles["cat-circle"]} aria-hidden="true">
+          <img
+            src={`../../Iconos/${c.nombre}.png`}
+            alt={c.nombre}
+            className={styles["cat-icon"]}
+          />
+        </span>
 
-                    <small className="cat-label">{c.nombre}</small> 
-                </button>
-            ))}
+        <small className={styles["cat-label"]}>{c.nombre}</small>
+      </button>
+    ))}
+  </div>
+
+  {/* === PRODUCTOS GRID === */}
+  <div className={styles["products-grid-main"]} aria-live="polite">
+    {filtered.map((p) => (
+      <article
+        key={p.id_empxprod}
+        className={`${styles["product-card"]} ${styles["grid-card"]}`}
+        onClick={() => openExpanded(p)}
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === "Enter") openExpanded(p); }}
+        role="button"
+        aria-label={`${p.nombre_emprendimiento} ${p.nombre_producto}`}
+      >
+        <div className={styles["product-img-wrap"]}>
+          {p.codigo_imagen ? (
+            <img
+              className={styles["ImagenesProducto"]}
+              src={`http://localhost:5050/Imagenes/${p.codigo_imagen}`}
+              alt={p.nombre_producto}
+            />
+          ) : (
+            <div className={styles["no-img"]}>Sin imagen</div>
+          )}
         </div>
 
-        {/* === PRODUCTOS GRID === */}
-        <div className="products-grid-main" aria-live="polite">
-            {filtered.map((p) => (
-                <article
-                    key={p.id_empxprod}
-                    className="product-card grid-card"
-                    onClick={() => openExpanded(p)}
-                    tabIndex={0}
-                    onKeyDown={(e) => { if (e.key === "Enter") openExpanded(p); }}
-                    role="button"
-                    aria-label={`${p.nombre_emprendimiento} ${p.nombre_producto}`}
-                >
-                    <div className="product-img-wrap">
-                        {p.codigo_imagen ? (
-                            <img className="ImagenesProducto"
-                                src={`http://localhost:5050/Imagenes/${p.codigo_imagen}`}
-                                alt={p.nombre_producto}
-                            />
-                        ) : (
-                            <div className="no-img">Sin imagen</div>
-                        )}
-                    </div>
+        <div className={styles["product-info"]}>
+          <small className={styles.brand}>{p.nombre_emprendimiento}</small>
+          <h3 className={styles.title}>{p.nombre_producto}</h3>
+          <div className={styles.price}>${p.precio}</div>
+        </div>
+      </article>
+    ))}
 
-                    <div className="product-info">
-                        <small className="brand">{p.nombre_emprendimiento}</small>
-                        <h3 className="title">{p.nombre_producto}</h3>
-                        <div className="price">${p.precio}</div>
-                    </div>
-                </article>
-            ))}
+    {filtered.length === 0 && (
+      <div className={styles["no-results"]}>No hay productos en esta categoría.</div>
+    )}
+  </div>
 
-            {filtered.length === 0 && (
-                <div className="no-results">No hay productos en esta categoría.</div>
+  {/* === MODAL EXPANDIDO === */}
+  {expandedProduct && (
+    <div className={styles["pg-overlay"]} onClick={closeExpanded} role="dialog" aria-modal="true">
+      <div className={styles["pg-expanded-card"]} onClick={(e) => e.stopPropagation()}>
+        <div className={styles["pg-expanded-left"]}>
+          <div className={`${styles["product-img-wrap"]} ${styles["expanded-img"]}`}>
+            {expandedProduct.codigo_imagen ? (
+              <img
+                className={styles["ImagenesProducto"]}
+                src={`http://localhost:5050/Imagenes/${expandedProduct.codigo_imagen}`}
+                alt={expandedProduct.nombre_producto}
+              />
+            ) : (
+              <div className={styles["no-img"]}>Sin imagen</div>
             )}
+          </div>
         </div>
 
-        {/* === MODAL EXPANDIDO === */}
-        {expandedProduct && (
-            <div className="pg-overlay" onClick={closeExpanded} role="dialog" aria-modal="true">
-                <div className="pg-expanded-card" onClick={(e) => e.stopPropagation()}>
-                    <div className="pg-expanded-left">
-                        <div className="product-img-wrap expanded-img">
-                            {expandedProduct.codigo_imagen ? (
-                                <img className="ImagenesProducto"
-                                    src={`http://localhost:5050/Imagenes/${expandedProduct.codigo_imagen}`}
-                                    alt={expandedProduct.nombre_producto}
-                                />
-                            ) : (
-                                <div className="no-img">Sin imagen</div>
-                            )}
-                        </div>
+        <div className={styles["pg-expanded-right"]}>
+          <small className={styles.brand}>{expandedProduct.nombre_emprendimiento}</small>
+          <h3 className={styles.title}>{expandedProduct.nombre_producto}</h3>
+          <div className={styles.price}>${expandedProduct.precio}</div>
+
+          <p className={styles.description}>{expandedProduct.descripcion}</p>
+
+          <div className={styles["rating-block"]} onClick={(e) => e.stopPropagation()}>
+            {(() => {
+              const avg = expandedProduct.PuntajeProm ? Number(expandedProduct.PuntajeProm) : 0;
+              const count = expandedProduct.votos ? Number(expandedProduct.votos) : 0;
+
+              const avgRound = Math.round(avg);
+              const userVote = userVotes[expandedProduct.id_empxprod] || 0;
+              const display = hover || userVote || avgRound;
+
+              return (
+                <div className={styles["rating-row"]} aria-label={`Puntuación promedio ${avg.toFixed(1)} de 5`}>
+                  <div className={styles["rating-div"]}>
+                    <div className={styles["stars-input"]} aria-label="Puntuación del producto">
+                      {[1, 2, 3, 4, 5].map(i => (
+                        <button
+                          key={i}
+                          className={styles["star-btn"]}
+                          title={`Votar ${i} estrellas`}
+                          onMouseEnter={() => setHover(i)}
+                          onMouseLeave={() => setHover(0)}
+                          onClick={() => { submitRating(expandedProduct.id_empxprod, i); }}
+                        >
+                          <span className={`${styles.star} ${i <= display ? styles.filled : ""}`}>★</span>
+                        </button>
+                      ))}
                     </div>
 
-                    <div className="pg-expanded-right">
-                        <small className="brand">{expandedProduct.nombre_emprendimiento}</small>
-                        <h3 className="title">{expandedProduct.nombre_producto}</h3>
-                        <div className="price">${expandedProduct.precio}</div>
-
-                        <p className="description">{expandedProduct.descripcion}</p>
-
-                            <div className="rating-block" onClick={(e) => e.stopPropagation()}>
-                                {(() => {
-                                    const avg = expandedProduct.PuntajeProm ? Number(expandedProduct.PuntajeProm) : 0;
-                                    const count = expandedProduct.votos ? Number(expandedProduct.votos) : 0;
-
-                                    
-                                    const avgRound = Math.round(avg);
-                                    const userVote = userVotes[expandedProduct.id_empxprod] || 0;
-                                    const display = hover || userVote || avgRound;
-
-                                    return (
-                                        <div className="rating-row" aria-label={`Puntuación promedio ${avg.toFixed(1)} de 5`}>
-                                            <div className="rating-div">
-                                                <div className="stars-input" aria-label="Puntuación del producto">
-                                                    {[1, 2, 3, 4, 5].map(i => (
-                                                        <button
-                                                            key={i}
-                                                            className="star-btn"
-                                                            title={`Votar ${i} estrellas`}
-                                                            onMouseEnter={() => setHover(i)}
-                                                            onMouseLeave={() => setHover(0)}
-                                                            onClick={() => { submitRating(expandedProduct.id_empxprod, i); }}
-                                                            // aria-label={`Votar ${i} estrellas`}
-                                                        >
-                                                            <span className={`star ${i <= display ? "filled" : ""}`}>★</span>
-                                                        </button>
-                                                    ))}
-                                                </div>
-                                                <div className="avg-number" >
-                                                    {count > 0 
-                                                    ? `${avg.toFixed(1)} / 5 (${count})` : "Sin puntuaciones"}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })()}
-                            </div>
-                            <div className="actions">
-                                <button className="btn-primary" onClick={() => { /* informacion emprendedor */ }}>Mas informacion</button>
-                                <button className="btn-secondary" onClick={closeExpanded}>Cerrar</button>
-                            </div>
-                        </div>
+                    <div className={styles["avg-number"]}>
+                      {count > 0
+                        ? `${avg.toFixed(1)} / 5 (${count})`
+                        : "Sin puntuaciones"}
                     </div>
+                  </div>
                 </div>
-            )}
-        </section>
+              );
+            })()}
+          </div>
+
+          <div className={styles.actions}>
+            <button className={styles["btn-primary"]}>Más información</button>
+            <button className={styles["btn-secondary"]} onClick={closeExpanded}>Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+</section>
+
     );
 }

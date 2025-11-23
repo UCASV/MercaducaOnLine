@@ -162,11 +162,11 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-.arrow.left {
+.arrow-left {
     left: 0;
 }
 
-.arrow.right {
+.arrow-right {
     right: 0;
 }
 

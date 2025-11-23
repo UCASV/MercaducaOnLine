@@ -1,4 +1,4 @@
-import "./Productos.css";
+import "./Productos.module.css";
 import ProductsGrid from "./ProductsGrid.jsx";
 
 export default function Productos() {

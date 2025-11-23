@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Emprendimientos.css";
+import styles from  "./Emprendimientos.module.css";
 
 // Importar imagen genérica
 import genericIcon from "../img/generic.png";
@@ -338,109 +338,120 @@ export default function EmprendimientosGrid() {
     }, [selectedEmprendimiento]);
 
     return (
-        <section className="emprendimientos-grid-section">
-            <header className="eg-page-header">
-                <div className="eg-header-inner">
-                    <h1 className="eg-header-title">Todos los Emprendimientos</h1>
-                    <p className="eg-header-subtitle">Base de datos completa</p>
+        <section className={styles["emprendimientos-grid-section"]}>
+    <header className={styles["eg-page-header"]}>
+        <div className={styles["eg-header-inner"]}>
+            <h1 className={styles["eg-header-title"]}>Todos los Emprendimientos</h1>
+            <p className={styles["eg-header-subtitle"]}>Base de datos completa</p>
+        </div>
+    </header>
+
+    <div className={styles["emprendimientos-grid-main"]} aria-live="polite">
+        {emprendimientos.map((e) => (
+            <article
+                key={e.id}
+                className={
+                    `${styles["emprendimiento-card"]} ` +
+                    (e.tipo === "proximo"
+                        ? styles["proximo-card"]
+                        : styles["activo-card"])
+                }
+                onClick={() => openExpanded(e)}
+                tabIndex={0}
+                onKeyDown={(ev) => { if (ev.key === "Enter") openExpanded(e); }}
+                role="button"
+                aria-label={`Emprendimiento ${e.nombre}`}
+            >
+                <div className={styles["emprendimiento-img-wrap"]}>
+                    <img src={getLogo(e)} alt={e.nombre} />
+                    {e.tipo === "proximo" && (
+                        <span className={styles["proximo-badge"]}>Próximamente</span>
+                    )}
                 </div>
-            </header>
 
-            <div className="emprendimientos-grid-main" aria-live="polite">
-                {emprendimientos.map((e) => (
-                    <article
-                        key={e.id}
-                        className={`emprendimiento-card ${e.tipo === "proximo" ? "proximo-card" : "activo-card"}`}
-                        onClick={() => openExpanded(e)}
-                        tabIndex={0}
-                        onKeyDown={(ev) => { if (ev.key === "Enter") openExpanded(e); }}
-                        role="button"
-                        aria-label={`Emprendimiento ${e.nombre}`}
-                    >
-                        <div className="emprendimiento-img-wrap">
-                            <img src={getLogo(e)} alt={e.nombre} />
-                            {e.tipo === "proximo" && (
-                                <span className="proximo-badge">Próximamente</span>
-                            )}
+                <div className={styles["emprendimiento-info"]}>
+                    <h3 className={styles["emprendimiento-nombre"]}>{e.nombre}</h3>
+                    <p className={styles["emprendimiento-descripcion"]}>{e.descripcion}</p>
+                    <span className={styles["emprendimiento-categoria"]}>{e.categoria}</span>
+
+                    {e.tipo === "activo" && (
+                        <div className={styles["emprendimiento-contacto"]}>
+                            <small>Contacto: {e.contacto}</small>
                         </div>
+                    )}
+                </div>
+            </article>
+        ))}
+    </div>
 
-                        <div className="emprendimiento-info">
-                            <h3 className="emprendimiento-nombre">{e.nombre}</h3>
-                            <p className="emprendimiento-descripcion">{e.descripcion}</p>
-                            <span className="emprendimiento-categoria">{e.categoria}</span>
-                            {e.tipo === "activo" && (
-                                <div className="emprendimiento-contacto">
-                                    <small>Contacto: {e.contacto}</small>
-                                </div>
-                            )}
-                        </div>
-                    </article>
-                ))}
-            </div>
-
-            {selectedEmprendimiento && (
-                <div className="eg-overlay" onClick={closeExpanded} role="dialog" aria-modal="true">
-                    <div className="eg-expanded-card" onClick={(e) => e.stopPropagation()}>
-                        <div className="eg-expanded-left">
-                            <div className="emprendimiento-img-wrap expanded-img">
-                                <img src={getLogo(selectedEmprendimiento)} alt={selectedEmprendimiento.nombre} />
-                                {selectedEmprendimiento.tipo === "proximo" && (
-                                    <span className="proximo-badge large">Próximamente</span>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="eg-expanded-right">
-                            <h2 className="emprendimiento-nombre-expanded">{selectedEmprendimiento.nombre}</h2>
-                            <span className="emprendimiento-categoria-expanded">{selectedEmprendimiento.categoria}</span>
-                            
-                            <p className="emprendimiento-descripcion-expanded">
-                                {selectedEmprendimiento.descripcion_larga || selectedEmprendimiento.descripcion}
-                            </p>
-
-                            <div className="emprendimiento-detalles">
-                                <div className="detalle-item">
-                                    <strong>Contacto:</strong> {selectedEmprendimiento.contacto}
-                                </div>
-                                {selectedEmprendimiento.email && (
-                                    <div className="detalle-item">
-                                        <strong>Email:</strong> {selectedEmprendimiento.email}
-                                    </div>
-                                )}
-                                {selectedEmprendimiento.telefono && (
-                                    <div className="detalle-item">
-                                        <strong>Teléfono:</strong> {selectedEmprendimiento.telefono}
-                                    </div>
-                                )}
-                                {selectedEmprendimiento.redes_sociales && (
-                                    <div className="detalle-item">
-                                        <strong>Redes Sociales:</strong> {selectedEmprendimiento.redes_sociales}
-                                    </div>
-                                )}
-                                {selectedEmprendimiento.productos && selectedEmprendimiento.productos.length > 0 && (
-                                    <div className="detalle-item">
-                                        <strong>Productos:</strong>
-                                        <div className="productos-lista">
-                                            {selectedEmprendimiento.productos.map((producto, index) => (
-                                                <span key={index} className="producto-tag">{producto}</span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="actions">
-                                <button className="btn-primary" onClick={() => { /* acción de contacto */ }}>
-                                    {selectedEmprendimiento.tipo === "activo" ? "Contactar" : "Más Información"}
-                                </button>
-                                <button className="btn-secondary" onClick={closeExpanded}>
-                                    Cerrar
-                                </button>
-                            </div>
-                        </div>
+    {selectedEmprendimiento && (
+        <div className={styles["eg-overlay"]} onClick={closeExpanded} role="dialog" aria-modal="true">
+            <div className={styles["eg-expanded-card"]} onClick={(e) => e.stopPropagation()}>
+                <div className={styles["eg-expanded-left"]}>
+                    <div className={`${styles["emprendimiento-img-wrap"]} ${styles["expanded-img"]}`}>
+                        <img src={getLogo(selectedEmprendimiento)} alt={selectedEmprendimiento.nombre} />
+                        {selectedEmprendimiento.tipo === "proximo" && (
+                            <span className={`${styles["proximo-badge"]} ${styles["large"]}`}>Próximamente</span>
+                        )}
                     </div>
                 </div>
-            )}
-        </section>
+
+                <div className={styles["eg-expanded-right"]}>
+                    <h2 className={styles["emprendimiento-nombre-expanded"]}>{selectedEmprendimiento.nombre}</h2>
+                    <span className={styles["emprendimiento-categoria-expanded"]}>{selectedEmprendimiento.categoria}</span>
+
+                    <p className={styles["emprendimiento-descripcion-expanded"]}>
+                        {selectedEmprendimiento.descripcion_larga || selectedEmprendimiento.descripcion}
+                    </p>
+
+                    <div className={styles["emprendimiento-detalles"]}>
+                        <div className={styles["detalle-item"]}>
+                            <strong>Contacto:</strong> {selectedEmprendimiento.contacto}
+                        </div>
+
+                        {selectedEmprendimiento.email && (
+                            <div className={styles["detalle-item"]}>
+                                <strong>Email:</strong> {selectedEmprendimiento.email}
+                            </div>
+                        )}
+
+                        {selectedEmprendimiento.telefono && (
+                            <div className={styles["detalle-item"]}>
+                                <strong>Teléfono:</strong> {selectedEmprendimiento.telefono}
+                            </div>
+                        )}
+
+                        {selectedEmprendimiento.redes_sociales && (
+                            <div className={styles["detalle-item"]}>
+                                <strong>Redes Sociales:</strong> {selectedEmprendimiento.redes_sociales}
+                            </div>
+                        )}
+
+                        {selectedEmprendimiento.productos?.length > 0 && (
+                            <div className={styles["detalle-item"]}>
+                                <strong>Productos:</strong>
+                                <div className={styles["productos-lista"]}>
+                                    {selectedEmprendimiento.productos.map((producto, index) => (
+                                        <span key={index} className={styles["producto-tag"]}>{producto}</span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className={styles["actions"]}>
+                        <button className={styles["btn-primary"]}>
+                            {selectedEmprendimiento.tipo === "activo" ? "Contactar" : "Más Información"}
+                        </button>
+                        <button className={styles["btn-secondary"]} onClick={closeExpanded}>
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )}
+</section>
+
     );
 }

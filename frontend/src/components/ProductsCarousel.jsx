@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import "./ProductsCarousel.css";
+import styles from  "./ProductsCarousel.module.css";
 
 export default function ProductsCarousel() {
   const [productsTop, setProductsTop] = useState([]);
@@ -92,6 +92,13 @@ export default function ProductsCarousel() {
     el.scrollBy({ left: el.clientWidth * dir, behavior: "smooth" });
   };
 
+  function getRatingInfo(productId) {
+    const arr = rating[productId] || [];
+    if (arr.length === 0) return { avg: 0, count: 0 };
+    const sum = arr.reduce((s, v) => s + v, 0);
+    return { avg: sum / arr.length, count: arr.length };
+  }
+
 async function submitRating(productId, value) {
   try {
     // Llamada al backend que recalcula PuntajeProm y total de votos
@@ -145,101 +152,43 @@ async function submitRating(productId, value) {
 
   return (
     <>
-      <div className="products-carousel">
-        <h2>Top 1 de cada categoría</h2>
+      <div className={styles["products-carousel"]}>
+  <h2>Top 1 de cada categoría</h2>
 
-        <div className="carousel-wrapper">
-          <button className="arrow left" onClick={() => scrollByWidth(-1)}></button>
+  <div className={styles["carousel-wrapper"]}>
+    <button className={styles.arrow} onClick={() => scrollByWidth(-1)}> ‹
+ </button>
 
-          <div className="carousel" ref={carouselRef}>
-            {productsTop.map((u) => (
-              <article
-                key={u.id_empxprod}
-                className="card"
-                onClick={() => setSelected(u)}
-              >
-                <div className="card-img">
-                  <img
-                    src={`http://localhost:5050/Imagenes/${u.codigo_imagen}`}
-                    alt={u.nombre_producto}
-                  />
-                </div>
-                <div className="card-body">
-                  <h3>{u.nombre_producto}</h3>
-                  <p className="categoria">{u.categoria}</p>
-                  <p className="short">{u.descripcion}</p>
-                  <div className="price">${u.precio}</div>
-                </div>
-              </article>
-            ))}
+    <div className={styles.carousel} ref={carouselRef}>
+      {productsTop.map((u) => (
+        <article
+          key={u.id_empxprod}
+          className={styles.card}
+          onClick={() => setSelected(u)}
+        >
+          <div className={styles["card-img"]}>
+            <img
+              src={`http://localhost:5050/Imagenes/${u.codigo_imagen}`}
+              alt={u.nombre_producto}
+            />
           </div>
 
-          <button className="arrow right" onClick={() => scrollByWidth(1)}>
-            ›
-          </button>
-        </div>
-      </div>
-
-{selected && (
-  <div className="overlay" onClick={() => setSelected(null)}>
-    <div className="modal" onClick={(e) => e.stopPropagation()}>
-      <button className="close" onClick={() => setSelected(null)}>✕</button>
-
-      <div className="modal-img">
-        <img
-          src={`http://localhost:5050/Imagenes/${selected.codigo_imagen}`}
-          alt={selected.nombre_producto}
-        />
-      </div>
-
-      <div className="modal-body">
-        <h2>{selected.nombre_producto}</h2>
-        <p className="long-desc">{selected.descripcion}</p>
-        <p className="price-large">Precio: ${selected.precio}</p>
-
-        <div className="rating-block" onClick={(e) => e.stopPropagation()}>
-  {(() => {
-    // Promedio y conteo 
-    const avg = selected.PuntajeProm ?? 0;
-    const count = selected.votos ?? 0;
-
-    const avgRound = Math.round(avg);
-    const userVote = userVotes[selected.id_empxprod] || 0;
-    const display = hover || userVote || avgRound;
-
-    return (
-      <div className="rating-row" aria-label={`Puntuación promedio ${avg.toFixed(1)} de 5`}>
-        <div className="rating">
-          <div className="stars-input">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <button
-                key={i}
-                className="star-btn"
-                onMouseEnter={() => setHover(i)}
-                onMouseLeave={() => setHover(0)}
-                onClick={() => submitRating(selected.id_empxprod, i)}
-                
-              >
-                <span className={`star ${i <= display ? "filled" : ""}`}>★</span>
-              </button>
-            ))}
+          <div className={styles["card-body"]}>
+            <h3>{u.nombre_producto}</h3>
+            <p className={styles.categoria}>{u.categoria}</p>
+            <p className={styles.short}>{u.descripcion}</p>
+            <div className={styles.price}>${u.precio}</div>
           </div>
+        </article>
+      ))}
+    </div>
 
-          <div className="avg-number">
-            {count > 0
-              ? `${avg.toFixed(1)} / 5 (${count} votos)`
-              : "Sin puntuaciones"}
-          </div>
-        </div>
-      </div>
-    );
-  })()}
+    <button className={styles.arrow} onClick={() => scrollByWidth(1)}>
+      ›
+    </button>
+  </div>
 </div>
 
-      </div>
-    </div>
-  </div>
-)}
 
     </>
   );
