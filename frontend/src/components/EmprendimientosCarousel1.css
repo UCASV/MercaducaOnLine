@@ -1,0 +1,333 @@
+.emprendimientos-prox-carousel {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    margin: 2rem 0;
+    border-radius: 15px;
+}
+
+.emprendimientos-prox-carousel h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #000000;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.proximos-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.carousel-wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+.carousel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% / 3) - 1rem);
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 1rem 0;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.emprendimiento-card {
+    min-width: auto;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    height: 350px; /* Altura fija para que no sean tan largos */
+    scroll-snap-align: start;
+}
+
+.emprendimiento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.card-img {
+    position: relative;
+    height: 140px; /* Reducir altura de la imagen */
+    overflow: hidden;
+    flex-shrink: 0; /* Evitar que la imagen se encoja */
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center;     /* centra verticalmente */
+}
+
+.card-img img {
+    width: auto;
+    height: 100%;
+    object-fit: cover; /* Cambiar a cover para mejor aspecto */
+    transition: transform 0.3s ease;
+}
+
+.emprendimiento-card:hover .card-img img {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Evitar desbordamiento */
+    text-align: center;
+}
+
+.card-body h3 {
+    font-size: 1.2rem;
+    color:#000000;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.short-desc {
+    color:  #000000;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+    font-size: 0.85rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Mostrar solo 2 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+.categoria {
+    display: inline-block;
+    background: #3f5b3b;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    align-self: center;
+}
+
+.contacto {
+    padding-top: 0.8rem;
+    border-top: 1px solid #e9ecef;
+    font-size: 0.8rem;
+    color: #495057;
+    font-weight: 500;
+    margin-top: auto; /* Empujar hacia abajo */
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow:hover {
+    background: white;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.arrow.left {
+    left: 0;
+}
+
+.arrow.right {
+    right: 0;
+}
+
+/* Modal Styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+}
+
+.modal {
+    background: white;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-img {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center;     /* centra verticalmente */
+    padding-top: 40px; 
+}
+
+.modal-img img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-body h2 {
+    color:  #000000;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.long-desc {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.detalles {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid  #3f5b3b;
+}
+
+.detalles p {
+    margin: 0.5rem 0;
+    color:  #000000;
+}
+
+/* Responsive para 4 elementos */
+@media (max-width: 1200px) {
+    .carousel {
+        grid-auto-columns: calc(33.333% - 1.333rem); /* 3 elementos */
+    }
+    
+    .emprendimiento-card {
+        height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel {
+        grid-auto-columns: calc(50% - 0.75rem); /* 2 elementos */
+    }
+    
+    .carousel-wrapper {
+        padding: 0 1rem;
+    }
+    
+    .emprendimientos-activos-carousel h2 {
+        font-size: 2rem;
+    }
+    
+    .arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .emprendimiento-card {
+        height: 300px;
+    }
+    
+    .card-img {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel {
+        grid-auto-columns: 100%; /* 1 elemento */
+    }
+    
+    .emprendimientos-activos-carousel {
+        padding: 2rem 0;
+    }
+    
+    .emprendimiento-card {
+        height: 280px;
+        margin: 0 0.5rem;
+    }
+    
+    .card-img {
+        height: 100px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-body h3 {
+        font-size: 1.1rem;
+    }
+}
+
+.carousel {
+    scroll-padding: 0 1rem;
+}
+
+.emprendimiento-card {
+    min-height: 300px;
+}

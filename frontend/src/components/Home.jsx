@@ -6,6 +6,8 @@ import instagram from "../img/instagram.png";
 import ProductsCarousel from "./ProductsCarousel.jsx";
 
 import "./Home.css";
+import EmprendimientosCarousel from "./EmprendimientosCarousel1.jsx";
+import EmprendimientosActivosGrid from "./EmprendimientosActivosGrid.jsx";
 
 function Home() {
   const [count, setCount] = useState(0);
@@ -116,44 +118,7 @@ function Home() {
               </p>
               <section id="contenedorEmprendimientos">
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum non reprehenderit harum dicta quod odio officiis
-                  facere et natus earum. Aliquam quia, aliquid illo amet a quo
-                  exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Suscipit fugiat id optio,
-                  maiores magnam asperiores distinctio labore. Assumenda modi,
-                  rerum ut, similique vero non officia, obcaecati facilis quo
-                  provident ipsum? Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Nostrum non reprehenderit harum dicta quod
-                  odio officiis facere et natus earum. Aliquam quia, aliquid
-                  illo amet a quo exercitationem deserunt explicabo. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Eligendi minus
-                  deserunt sed ex aliquid debitis unde necessitatibus repellat
-                  porro veritatis facilis exercitationem suscipit, quam, fugiat
-                  assumenda sapiente, temporibus officia quaerat. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Nostrum non
-                  reprehenderit harum dicta quod odio officiis facere et natus
-                  earum. Aliquam quia, aliquid illo amet a quo exercitationem
-                  deserunt explicabo. Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Eligendi minus deserunt sed ex aliquid
-                  debitis unde necessitatibus repellat porro veritatis facilis
-                  exercitationem suscipit, quam, fugiat assumenda sapiente,
-                  temporibus officia quaerat. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Nostrum non reprehenderit harum
-                  dicta quod odio officiis facere et natus earum. Aliquam quia,
-                  aliquid illo amet a quo exercitationem deserunt explicabo.
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eligendi minus deserunt sed ex aliquid debitis unde
-                  necessitatibus repellat porro veritatis facilis exercitationem
-                  suscipit, quam, fugiat assumenda sapiente, temporibus officia
-                  quaerat. Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Nostrum non reprehenderit harum dicta quod odio officiis
-                  facere et natus earum. Aliquam quia, aliquid illo amet a quo
-                  exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Eligendi minus deserunt sed ex
-                  aliquid debitis unde necessitatibus repellat porro veritatis
-                  facilis exercitationem suscipit, quam, fugiat assumenda
-                  sapiente, temporibus officia quaerat.
+                  <EmprendimientosActivosGrid/>
                 </p>
               </section>
               <div id="contenedorMasVendidos">
@@ -163,44 +128,7 @@ function Home() {
               </div>
               <div id="contenedorProximos">
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum non reprehenderit harum dicta quod odio officiis
-                  facere et natus earum. Aliquam quia, aliquid illo amet a quo
-                  exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Suscipit fugiat id optio,
-                  maiores magnam asperiores distinctio labore. Assumenda modi,
-                  rerum ut, similique vero non officia, obcaecati facilis quo
-                  provident ipsum? Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Nostrum non reprehenderit harum dicta quod
-                  odio officiis facere et natus earum. Aliquam quia, aliquid
-                  illo amet a quo exercitationem deserunt explicabo. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Eligendi minus
-                  deserunt sed ex aliquid debitis unde necessitatibus repellat
-                  porro veritatis facilis exercitationem suscipit, quam, fugiat
-                  assumenda sapiente, temporibus officia quaerat. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Nostrum non
-                  reprehenderit harum dicta quod odio officiis facere et natus
-                  earum. Aliquam quia, aliquid illo amet a quo exercitationem
-                  deserunt explicabo. Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Eligendi minus deserunt sed ex aliquid
-                  debitis unde necessitatibus repellat porro veritatis facilis
-                  exercitationem suscipit, quam, fugiat assumenda sapiente,
-                  temporibus officia quaerat. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Nostrum non reprehenderit harum
-                  dicta quod odio officiis facere et natus earum. Aliquam quia,
-                  aliquid illo amet a quo exercitationem deserunt explicabo.
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eligendi minus deserunt sed ex aliquid debitis unde
-                  necessitatibus repellat porro veritatis facilis exercitationem
-                  suscipit, quam, fugiat assumenda sapiente, temporibus officia
-                  quaerat. Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Nostrum non reprehenderit harum dicta quod odio officiis
-                  facere et natus earum. Aliquam quia, aliquid illo amet a quo
-                  exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Eligendi minus deserunt sed ex
-                  aliquid debitis unde necessitatibus repellat porro veritatis
-                  facilis exercitationem suscipit, quam, fugiat assumenda
-                  sapiente, temporibus officia quaerat.
+                 <EmprendimientosCarousel/>
                 </p>
               </div>
             </div>
