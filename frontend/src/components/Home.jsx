@@ -12,8 +12,12 @@ function Home() {
   const navigate = useNavigate();
 
     const Productos = () => {
-    navigate("/productos"); // te lleva a la página de productos
-  };
+      navigate("/productos"); // te lleva a la página de productos
+    };
+    
+    const Eventos = () => {
+      navigate("/Eventos")
+    };
 
   return (
     <>
@@ -36,7 +40,7 @@ function Home() {
                 <li>Inicio</li>
               </a>
               {/* <!-- otra pagina para eventos --> */}
-              <a class="elemento" href="#">
+              <a class="elemento" onClick={Eventos}>
                 <li id="eventos">Eventos</li>
               </a>
               {/* <!-- otra pagina para productos --> */}
@@ -217,7 +221,7 @@ function Home() {
               <br />
               Encuentranos en
               <img class="icono" src={instagram} alt="Instagram" />
-              <a class="link" href="#">
+              <a class="link" href="https://www.instagram.com/mercaduca/">
                 Instagram!
               </a>
             </p>
