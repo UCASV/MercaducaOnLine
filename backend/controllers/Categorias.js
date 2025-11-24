@@ -1,6 +1,5 @@
 import { pool, sql, poolConnect } from "../connection/data.js";
 
-
 export const Categorias = async (req, res) => {
   try {
     await poolConnect;
@@ -12,7 +11,6 @@ export const Categorias = async (req, res) => {
     `);
 
     res.json(result.recordset);
-
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({
@@ -27,8 +25,7 @@ export const MasVendidoPorCategoria = async (req, res) => {
     await poolConnect;
     const categoria = req.params.categoria;
     const request = pool.request();
-    const result = await request
-      .input("categoria", sql.VarChar, categoria)
+    const result = await request.input("categoria", sql.VarChar, categoria)
       .query(`
         SELECT TOP 1 
             p.id AS id_producto,
@@ -58,7 +55,6 @@ export const MasVendidoPorCategoria = async (req, res) => {
       `);
 
     res.json(result.recordset);
-
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({
