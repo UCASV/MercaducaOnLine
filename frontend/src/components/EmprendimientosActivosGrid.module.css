@@ -1,0 +1,378 @@
+.emprendimientos-activos-grid {
+    padding: 1.5rem 1rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    margin: 1rem 0;
+    border-radius: 20px;
+}
+
+.grid-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.grid-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.grid-header p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    font-weight: 500;
+    margin: 0;
+}
+
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.8rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.logo-item:hover::before {
+    left: 100%;
+}
+
+.logo-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    border-color: #3f5b3b;
+}
+
+.logo-container {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 0.6rem;
+    transition: all 0.3s ease;
+}
+
+.logo-item:hover .logo-container {
+    background: #3f5b3b;
+    transform: scale(1.1);
+}
+
+.logo-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(30%);
+    transition: all 0.3s ease;
+}
+
+.logo-item:hover .logo-image {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.logo-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #3f5b3b;
+    text-align: center;
+    transition: all 0.3s ease;
+    line-height: 1.2;
+}
+
+.logo-item:hover .logo-name {
+    color: #3f5b3b;
+    font-weight: 700;
+}
+
+/* Modal Styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+}
+
+.modal {
+    background: white;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #d9e6dd86;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    background: #c0392b;
+    transform: scale(1.1);
+}
+
+.modal-header {
+    padding: 2rem 2rem 1rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #3f5b3b 0%, #3f5b3b 100%);
+    color: white;
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem auto;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-descripcion {
+    color: #3f5b3b;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.modal-detalles {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid #3f5b3b;
+}
+
+.detalle-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.detalle-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.detalle-item strong {
+    color: #3f5b3b;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.detalle-item span {
+    color: #000000;
+    font-size: 0.95rem;
+}
+
+.productos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.producto-tag {
+    background: #3f5b3b;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .emprendimientos-activos-grid {
+        padding: 2rem 1rem;
+    }
+    
+    .grid-header h2 {
+        font-size: 2.2rem;
+    }
+    
+    .grid-header p {
+        font-size: 1.1rem;
+    }
+    
+    .logos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .logo-container {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .logo-name {
+        font-size: 0.8rem;
+    }
+    
+    .modal {
+        margin: 1rem;
+    }
+    
+    .modal-header {
+        padding: 1.5rem 1.5rem 1rem 1.5rem;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1rem;
+    }
+    
+    .logo-container {
+        width: 60px;
+        height: 60px;
+        padding: 0.6rem;
+    }
+    
+    .logo-name {
+        font-size: 0.75rem;
+    }
+    
+    .grid-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
+.modal-detalles .detalle-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-detalles .rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Contenedor de cada estrella */
+.modal-detalles .star {
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  color: #ccc;
+}
+
+/* Estrella llena con ancho dinámico */
+.modal-detalles .filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #FFD700;
+}
+
+/* Estrella vacía debajo */
+.modal-detalles .empty {
+  color: #ccc;
+}
+
+/* Número de puntaje al lado */
+.modal-detalles .rating-number {
+  font-size: 16px;
+  margin-left: 6px;
+  color: #333;
+}

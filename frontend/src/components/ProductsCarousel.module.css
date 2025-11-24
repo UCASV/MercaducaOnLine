@@ -59,13 +59,17 @@
 .card-img img {
     width: 100%;
     height: 180px;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
 }
 
 .card-body {
     padding: 12px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
 }
 
 .card-body h3 {
@@ -92,10 +96,10 @@
     color: #111;
 }
 
-.overlay {
+.overlay, .pg-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.55);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,31 +107,35 @@
     padding: 20px;
 }
 
-.modal {
+.modal, .pg-expanded-card {
     background: #fff;
-    width: min(900px, 96%);
+    /* width: 80%;          ancho relativo a la pantalla */
+    /* max-width: 980px;    ancho máximo fijo */
+    max-height:70vh; 
     border-radius: 12px;
     display: flex;
     gap: 18px;
     overflow: hidden;
     position: relative;
     animation: pop .18s ease;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    padding: 18px;
 }
 
 @keyframes pop {
-    from {
-        transform: scale(.98);
-        opacity: 0
-    }
+    from { transform: scale(.98); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
+}
 
-    to {
-        transform: scale(1);
-        opacity: 1
-    }
+.modal-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
 }
 
 .modal-img img {
-    width: 420px;
+    height: 100%;
     max-height: 500px;
     object-fit: cover;
     display: block;
@@ -168,46 +176,103 @@
 }
 
 @media (max-width:1024px) {
-    .carousel {
-        width: 720px;
-    }
-
-    .card {
-        width: 320px;
-    }
-
-    .modal-img img {
-        width: 320px;
-    }
+    .carousel { width: 720px; }
+    .card { width: 320px; }
+    .modal-img img { width: 320px; }
 }
 
 @media (max-width:640px) {
-    .carousel {
-        width: calc(100% - 120px);
-    }
-
-    .card {
-        width: calc(100% - 40px);
-    }
-
-    .modal {
-        flex-direction: column;
-    }
-
-    .modal-img img {
-        max-width: 100%;
-        height: 260px;
-    }
+    .carousel { width: calc(100% - 120px); }
+    .card { width: calc(100% - 40px); }
+    .modal { flex-direction: column; }
+    .modal-img img { max-width: 100%; height: 260px; }
 }
 
-.avg-number{
-    font-size: 13;
+.avg-number {
+    font-size: 13px;
     color: #444;
 }
 
-.rating-row .rating{
+.rating-row .rating {
     display: flex;
-    align-items: "center";
-    gap: 12;
+    align-items: center;
+    gap: 12px;
 }
-                        
+
+/* Imagen Producto */
+.ImagenesProducto {
+    width: 200px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.ImagenesProducto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ImagenesProducto:hover img {
+    transform: scale(1.1);
+}
+
+/* Estrellas */
+.stars-display {
+    display: flex;
+    gap: 4px;
+    font-size: 20px;
+}
+
+.star {
+    color: #ddd;
+}
+
+.star.filled {
+    color: #ffb400;
+}
+
+.star-btn {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #ddd;
+}
+
+.star-btn .star {
+    pointer-events: none;
+}
+
+.star-btn:hover .star,
+.star-btn:focus .star {
+    color: #ffb400;
+    outline: none;
+}
+
+.star-btn:focus {
+    outline: 2px solid rgba(184, 0, 0, 0.16);
+    border-radius: 4px;
+}
+
+/* Tarjeta expandida */
+.pg-expanded-left { 
+    flex: 0 0 40%;
+    min-width: 220px; 
+}
+.pg-expanded-right { 
+    flex: 1 1 60%; 
+}
+.expanded-img { 
+    padding-top: 60%; 
+    position: relative; 
+    border-bottom: none; 
+}
+.expanded-img img { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    max-width: 90%; 
+    max-height: 90%; 
+}

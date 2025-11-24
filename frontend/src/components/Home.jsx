@@ -1,14 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
 import mercadoucapneg from "../img/mercaducaopng.png";
 import mercaducachiquitob from "../img/mercaducachiquitob.png";
 import instagram from "../img/instagram.png";
-import ProductsCarousel from "./ProductsCarousel.jsx";
 
-import "./Home.css";
+import ProductsCarousel from "./ProductsCarousel.jsx";
+import EmprendimientosCarousel from "./EmprendimientosCarousel1.jsx";
+import EmprendimientosActivosGrid from "./EmprendimientosActivosGrid.jsx";
+
+// IMPORTACIÓN CORRECTA DEL CSS MODULE
+import styles from "./Home.module.css";
 
 function Home() {
-  const [count, setCount] = useState(0);
   const navigate = useNavigate();
 
     const Productos = () => {
@@ -28,187 +32,85 @@ function Home() {
           <title> Mercaduca On Line</title>
         </head>
         <body id="inicio">
-          <nav>
-            <ul class="navbar">
-              <img
-                class="mercaducaLogonav"
-                src={mercaducachiquitob}
-                alt="Logo de Mercaduca On Line"
-              />
-              {/* <!-- llevarlo a una zona de la pagina --> */}
-              <a class="elemento" href="#inicio">
-                <li>Inicio</li>
-              </a>
-              {/* <!-- otra pagina para eventos --> */}
-              <a class="elemento" onClick={Eventos}>
-                <li id="eventos">Eventos</li>
-              </a>
-              {/* <!-- otra pagina para productos --> */}
-              <a class="elemento" onClick={Productos}>
-                <li id="productos" >
-                  Productos
-                </li>
-              </a>
-              {/* <!-- llevarlo a una zona de la pagina --> */}
-              <a class="elemento" href="#contenedorEmprendimientos">
-                <li>Emprendimientos</li>
-              </a>
-              {/* <!-- llevarlo a una zona de la pagina --> */}
-              <a class="elemento" href="#contenedorMasVendidos">
-                <li>Productos más vendidos</li>
-              </a>
-              {/* <!-- llevarlo a una zona de la pagina --> */}
-              <a class="elemento" href="#contenedorProximos">
-                <li>Emprendimientos próximos</li>
-              </a>
-              {/* <contacto footer */}
-              <a class="elemento" href="#footer">
-                <li>Contacto</li>
-              </a>
-            </ul>
-          </nav>
-          <section>
-            <div class="contenedorLogo">
-              <img
-                class="mercaducaLogoPrincipal"
-                src={mercadoucapneg}
-                alt="Logo de Mercaduca On Line"
-              />
-            </div>
+      <nav className={styles.navbarWrapper}>
+        <ul className={styles.navbar}>
+          <img
+            className={styles.mercaducaLogonav}
+            src={mercaducachiquitob}
+            alt="Logo de Mercaduca On Line"
+          />
 
-            <div class="contenedorPrincipal">
-              <h1>Bienvenidos a Mercaduca On Line</h1>
-              <p>
-                AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                non reprehenderit harum dicta quod odio officiis facere et natus
-                earum. Aliquam quia, aliquid illo amet a quo exercitationem
-                deserunt explicabo. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Suscipit fugiat id optio, maiores magnam
-                asperiores distinctio labore. Assumenda modi, rerum ut,
-                similique vero non officia, obcaecati facilis quo provident
-                ipsum? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nostrum non reprehenderit harum dicta quod odio officiis facere
-                et natus earum. Aliquam quia, aliquid illo amet a quo
-                exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Eligendi minus deserunt sed ex
-                aliquid debitis unde necessitatibus repellat porro veritatis
-                facilis exercitationem suscipit, quam, fugiat assumenda
-                sapiente, temporibus officia quaerat. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Nostrum non reprehenderit harum
-                dicta quod odio officiis facere et natus earum. Aliquam quia,
-                aliquid illo amet a quo exercitationem deserunt explicabo. Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-                minus deserunt sed ex aliquid debitis unde necessitatibus
-                repellat porro veritatis facilis exercitationem suscipit, quam,
-                fugiat assumenda sapiente, temporibus officia quaerat. Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Nostrum non
-                reprehenderit harum dicta quod odio officiis facere et natus
-                earum. Aliquam quia, aliquid illo amet a quo exercitationem
-                deserunt explicabo. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Eligendi minus deserunt sed ex aliquid debitis
-                unde necessitatibus repellat porro veritatis facilis
-                exercitationem suscipit, quam, fugiat assumenda sapiente,
-                temporibus officia quaerat. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Nostrum non reprehenderit harum
-                dicta quod odio officiis facere et natus earum. Aliquam quia,
-                aliquid illo amet a quo exercitationem deserunt explicabo. Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-                minus deserunt sed ex aliquid debitis unde necessitatibus
-                repellat porro veritatis facilis exercitationem suscipit, quam,
-                fugiat assumenda sapiente, temporibus officia quaerat.
-              </p>
-              <section id="contenedorEmprendimientos">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum non reprehenderit harum dicta quod odio officiis
-                  facere et natus earum. Aliquam quia, aliquid illo amet a quo
-                  exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Suscipit fugiat id optio,
-                  maiores magnam asperiores distinctio labore. Assumenda modi,
-                  rerum ut, similique vero non officia, obcaecati facilis quo
-                  provident ipsum? Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Nostrum non reprehenderit harum dicta quod
-                  odio officiis facere et natus earum. Aliquam quia, aliquid
-                  illo amet a quo exercitationem deserunt explicabo. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Eligendi minus
-                  deserunt sed ex aliquid debitis unde necessitatibus repellat
-                  porro veritatis facilis exercitationem suscipit, quam, fugiat
-                  assumenda sapiente, temporibus officia quaerat. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Nostrum non
-                  reprehenderit harum dicta quod odio officiis facere et natus
-                  earum. Aliquam quia, aliquid illo amet a quo exercitationem
-                  deserunt explicabo. Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Eligendi minus deserunt sed ex aliquid
-                  debitis unde necessitatibus repellat porro veritatis facilis
-                  exercitationem suscipit, quam, fugiat assumenda sapiente,
-                  temporibus officia quaerat. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Nostrum non reprehenderit harum
-                  dicta quod odio officiis facere et natus earum. Aliquam quia,
-                  aliquid illo amet a quo exercitationem deserunt explicabo.
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eligendi minus deserunt sed ex aliquid debitis unde
-                  necessitatibus repellat porro veritatis facilis exercitationem
-                  suscipit, quam, fugiat assumenda sapiente, temporibus officia
-                  quaerat. Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Nostrum non reprehenderit harum dicta quod odio officiis
-                  facere et natus earum. Aliquam quia, aliquid illo amet a quo
-                  exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Eligendi minus deserunt sed ex
-                  aliquid debitis unde necessitatibus repellat porro veritatis
-                  facilis exercitationem suscipit, quam, fugiat assumenda
-                  sapiente, temporibus officia quaerat.
-                </p>
-              </section>
-              <div id="contenedorMasVendidos">
-                <p>
-                  <ProductsCarousel />
-                </p>
-              </div>
-              <div id="contenedorProximos">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum non reprehenderit harum dicta quod odio officiis
-                  facere et natus earum. Aliquam quia, aliquid illo amet a quo
-                  exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Suscipit fugiat id optio,
-                  maiores magnam asperiores distinctio labore. Assumenda modi,
-                  rerum ut, similique vero non officia, obcaecati facilis quo
-                  provident ipsum? Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Nostrum non reprehenderit harum dicta quod
-                  odio officiis facere et natus earum. Aliquam quia, aliquid
-                  illo amet a quo exercitationem deserunt explicabo. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Eligendi minus
-                  deserunt sed ex aliquid debitis unde necessitatibus repellat
-                  porro veritatis facilis exercitationem suscipit, quam, fugiat
-                  assumenda sapiente, temporibus officia quaerat. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Nostrum non
-                  reprehenderit harum dicta quod odio officiis facere et natus
-                  earum. Aliquam quia, aliquid illo amet a quo exercitationem
-                  deserunt explicabo. Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Eligendi minus deserunt sed ex aliquid
-                  debitis unde necessitatibus repellat porro veritatis facilis
-                  exercitationem suscipit, quam, fugiat assumenda sapiente,
-                  temporibus officia quaerat. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Nostrum non reprehenderit harum
-                  dicta quod odio officiis facere et natus earum. Aliquam quia,
-                  aliquid illo amet a quo exercitationem deserunt explicabo.
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eligendi minus deserunt sed ex aliquid debitis unde
-                  necessitatibus repellat porro veritatis facilis exercitationem
-                  suscipit, quam, fugiat assumenda sapiente, temporibus officia
-                  quaerat. Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Nostrum non reprehenderit harum dicta quod odio officiis
-                  facere et natus earum. Aliquam quia, aliquid illo amet a quo
-                  exercitationem deserunt explicabo. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Eligendi minus deserunt sed ex
-                  aliquid debitis unde necessitatibus repellat porro veritatis
-                  facilis exercitationem suscipit, quam, fugiat assumenda
-                  sapiente, temporibus officia quaerat.
-                </p>
-              </div>
-            </div>
+          <li>
+            <a className={styles.elemento} href="#inicio">Inicio</a>
+          </li>
+
+          <li>
+            <button className={styles.elementoBtn} onClick={Eventos}>Eventos</button>
+          </li>
+
+          <li>
+            <button className={styles.elementoBtn} onClick={Productos}>
+              Productos
+            </button>
+          </li>
+
+          <li>
+            <a className={styles.elemento} href="#contenedorEmprendimientos">
+              Emprendimientos
+            </a>
+          </li>
+
+          <li>
+            <a className={styles.elemento} href="#contenedorMasVendidos">
+              Productos más vendidos
+            </a>
+          </li>
+
+          <li>
+            <a className={styles.elemento} href="#contenedorProximos">
+              Emprendimientos próximos
+            </a>
+          </li>
+
+          <li>
+            <a className={styles.elemento} href="#footer">Contacto</a>
+          </li>
+        </ul>
+      </nav>
+
+      {/* === CONTENIDO PRINCIPAL === */}
+      <section id="inicio" className={styles.mainSection}>
+        <div className={styles.contenedorLogo}>
+          <img
+            className={styles.mercaducaLogoPrincipal}
+            src={mercadoucapneg}
+            alt="Logo de Mercaduca On Line"
+          />
+        </div>
+
+        <div className={styles.contenedorPrincipal}>
+          <h1>Bienvenidos a Mercaduca On Line</h1>
+
+          <p className={styles.parrafo}>
+            COSASASSSSSSSSSSSSSSSSSS 
+          </p>
+
+          {/* === EMPRENDIMIENTOS ACTIVOS === */}
+          <section id="contenedorEmprendimientos">
+            <EmprendimientosActivosGrid />
           </section>
+
+          {/* === MAS VENDIDOS === */}
+          <div id="contenedorMasVendidos">
+            <ProductsCarousel />
+          </div>
+
+          {/* === EMPRENDIMIENTOS PROXIMOS === */}
+          <div id="contenedorProximos">
+            <EmprendimientosCarousel />
+          </div>
+        </div>
+      </section>
 
           <footer id="footer">
             <h3>Contactanos</h3>

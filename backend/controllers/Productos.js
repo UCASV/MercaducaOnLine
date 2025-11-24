@@ -1,10 +1,10 @@
-import { pool, poolConnect, sql } from '../connection/data.js'
+import { pool, poolConnect, sql } from "../connection/data.js";
 
 export const Productos = async (req, res) => {
   try {
     await poolConnect; // asegura que el pool está conectado
-    console.log('Connected to database');
-    
+    console.log("Connected to database");
+
     const request = pool.request();
 
     const result = await request.query(`
@@ -33,13 +33,13 @@ export const Productos = async (req, res) => {
         JOIN Categoria AS c ON c.id = p.id_categoria
         JOIN Imagen AS i ON i.id = ep.id_imagen;
       `);
-    
+
     res.json(result.recordset);
   } catch (error) {
-    console.error('Database error:', error);
-    res.status(500).json({ 
-      error: 'Error al obtener productos',
-      details: error.message 
+    console.error("Database error:", error);
+    res.status(500).json({
+      error: "Error al obtener productos",
+      details: error.message,
     });
   } finally {
   }
@@ -50,9 +50,11 @@ export const ProductosCategoria = async (req, res) => {
     await poolConnect;
     const request = pool.request();
 
-    const result = await request
-      .input("categoria", sql.VarChar, req.params.categoria)
-      .query(`
+    const result = await request.input(
+      "categoria",
+      sql.VarChar,
+      req.params.categoria
+    ).query(`
         SELECT 
             p.id AS id_producto,
             p.nombre AS nombre_producto,
@@ -82,12 +84,11 @@ export const ProductosCategoria = async (req, res) => {
       `);
 
     res.json(result.recordset);
-
   } catch (error) {
-    console.error('Database error:', error);
-    res.status(500).json({ 
-      error: 'Error al obtener productos por categoría',
-      details: error.message 
+    console.error("Database error:", error);
+    res.status(500).json({
+      error: "Error al obtener productos por categoría",
+      details: error.message,
     });
   } finally {
   }
