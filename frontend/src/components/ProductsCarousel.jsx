@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import styles from  "./ProductsCarousel.module.css";
+import styles from "./ProductsCarousel.module.css";
 
 export default function ProductsCarousel() {
   const [productsTop, setProductsTop] = useState([]);
@@ -59,13 +59,12 @@ export default function ProductsCarousel() {
               : res.data?.recordset?.[0] || res.data?.[0] || null;
 
           if (producto) {
-  tops.push({
-    ...producto,
-    PuntajeProm: producto.PuntajeProm ?? producto.promedio ?? 0, // promedio del producto
-    votos: producto.votos ?? producto.conteo ?? 0                // cantidad de votos
-  });
-}
-
+            tops.push({
+              ...producto,
+              PuntajeProm: producto.PuntajeProm ?? producto.promedio ?? 0, // promedio del producto
+              votos: producto.votos ?? producto.conteo ?? 0, // cantidad de votos
+            });
+          }
         } catch (err) {
           console.error("Error cargando top de categoría:", cat, err);
         }
@@ -73,12 +72,12 @@ export default function ProductsCarousel() {
 
       setProductsTop(tops);
       const initialRatings = {};
-      tops.forEach(p => {
+      tops.forEach((p) => {
         if (p.PuntajeProm != null) {
-          initialRatings[p.id_empxprod] = [p.PuntajeProm]; 
+          initialRatings[p.id_empxprod] = [p.PuntajeProm];
         }
-        });
-        setRating(initialRatings);
+      });
+      setRating(initialRatings);
       setLoading(false);
     };
 
@@ -99,97 +98,159 @@ export default function ProductsCarousel() {
     return { avg: sum / arr.length, count: arr.length };
   }
 
-async function submitRating(productId, value) {
-  try {
-    // Llamada al backend que recalcula PuntajeProm y total de votos
-    const res = await axios.post("http://localhost:5050/actualizarPromedio", {
-      id_empxprod: productId,
-      voto: value
-    });
+  async function submitRating(productId, value) {
+    try {
+      // Llamada al backend que recalcula PuntajeProm y total de votos
+      const res = await axios.post("http://localhost:5050/actualizarPromedio", {
+        id_empxprod: productId,
+        voto: value,
+      });
 
-    const { promedioProducto, promedioEmprendimiento, totalVotosProducto } = res.data;
+      const { promedioProducto, promedioEmprendimiento, totalVotosProducto } =
+        res.data;
 
-    // Actualizar rating local del producto
-    setRating(prev => ({
-      ...prev,
-      [productId]: [promedioProducto] // guardamos solo el promedio actual
-    }));
-
-    // Guardar voto del usuario para resaltar estrella
-    setUserVotes(prev => ({
-      ...prev,
-      [productId]: value
-    }));
-
-    setHover(0);
-
-    // Actualizar objeto seleccionado con los datos reales del backend
-    if (selected && selected.id_empxprod === productId) {
-      setSelected(prev => ({
+      // Actualizar rating local del producto
+      setRating((prev) => ({
         ...prev,
-        PuntajeProm: promedioProducto,
-        votos: totalVotosProducto // <-- aquí usamos el total real de votos
+        [productId]: [promedioProducto], // guardamos solo el promedio actual
       }));
-    }
 
-  } catch (err) {
-    console.error("Error al enviar voto:", err);
+      // Guardar voto del usuario para resaltar estrella
+      setUserVotes((prev) => ({
+        ...prev,
+        [productId]: value,
+      }));
+
+      setHover(0);
+
+      // Actualizar objeto seleccionado con los datos reales del backend
+      if (selected && selected.id_empxprod === productId) {
+        setSelected((prev) => ({
+          ...prev,
+          PuntajeProm: promedioProducto,
+          votos: totalVotosProducto, // <-- aquí usamos el total real de votos
+        }));
+      }
+    } catch (err) {
+      console.error("Error al enviar voto:", err);
+    }
   }
-}
 
+useEffect(() => {
+  document.body.style.overflow = selected ? "hidden" : "";
+}, [selected]);
 
-
-  useEffect(() => {
-    if (selected) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [selected]);
+useEffect(() => {
+  if (selected) {
+    document.body.classList.add("modal-open");
+  } else {
+    document.body.classList.remove("modal-open");
+  }
+}, [selected]);
 
 
   return (
     <>
       <div className={styles["products-carousel"]}>
-  <h2>Top 1 de cada categoría</h2>
+        <h2>Top 1 de cada categoría</h2>
 
-  <div className={styles["carousel-wrapper"]}>
-    <button className={styles.arrow} onClick={() => scrollByWidth(-1)}> ‹
- </button>
+        <div className={styles["carousel-wrapper"]}>
+          <button className={styles.arrow} onClick={() => scrollByWidth(-1)}>
+            {" "}
+            ‹
+          </button>
 
-    <div className={styles.carousel} ref={carouselRef}>
-      {productsTop.map((u) => (
-        <article
-          key={u.id_empxprod}
-          className={styles.card}
-          onClick={() => setSelected(u)}
-        >
-          <div className={styles["card-img"]}>
-            <img
-              src={`http://localhost:5050/Imagenes/${u.codigo_imagen}`}
-              alt={u.nombre_producto}
-            />
+          <div className={styles.carousel} ref={carouselRef}>
+            {productsTop.map((u) => (
+              <article
+                key={u.id_empxprod}
+                className={styles.card}
+                onClick={() => setSelected(u)}
+              >
+                <div className={styles["card-img"]}>
+                  <img
+                    src={`http://localhost:5050/Imagenes/${u.codigo_imagen}`}
+                    alt={u.nombre_producto}
+                  />
+                </div>
+
+                <div className={styles["card-body"]}>
+                  <h3>{u.nombre_producto}</h3>
+                  <p className={styles.categoria}>{u.categoria}</p>
+                  <p className={styles.short}>{u.descripcion}</p>
+                  <div className={styles.price}>${u.precio}</div>
+                </div>
+              </article>
+            ))}
           </div>
 
-          <div className={styles["card-body"]}>
-            <h3>{u.nombre_producto}</h3>
-            <p className={styles.categoria}>{u.categoria}</p>
-            <p className={styles.short}>{u.descripcion}</p>
-            <div className={styles.price}>${u.precio}</div>
-          </div>
-        </article>
-      ))}
-    </div>
+          <button className={styles.arrow} onClick={() => scrollByWidth(1)}>
+            ›
+          </button>
+        </div>
+      </div>
 
-    <button className={styles.arrow} onClick={() => scrollByWidth(1)}>
-      ›
-    </button>
-  </div>
+      
+{selected && (
+  <div className={styles.overlay} onClick={() => setSelected(null)}>
+    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <button className={styles.close} onClick={() => setSelected(null)}>✕</button>
+
+      <div className={styles["modal-img"]}>
+        <img
+          src={`http://localhost:5050/Imagenes/${selected.codigo_imagen}`}
+          alt={selected.nombre_producto}
+        />
+      </div>
+
+      <div className={styles["modal-body"]}>
+        <h2>{selected.nombre_producto}</h2>
+        <p className={styles["long-desc"]}>{selected.descripcion}</p>
+        <p className={styles["price-large"]}>Precio: ${selected.precio}</p>
+
+        <div className={styles["rating-block"]} onClick={(e) => e.stopPropagation()}>
+  {(() => {
+    // Promedio y conteo 
+    const avg = selected.PuntajeProm ?? 0;
+    const count = selected.votos ?? 0;
+
+    const avgRound = Math.round(avg);
+    const userVote = userVotes[selected.id_empxprod] || 0;
+    const display = hover || userVote || avgRound;
+
+    return (
+      <div className={styles["rating-row"]} aria-label={`Puntuación promedio ${avg.toFixed(1)} de 5`}>
+        <div className={styles.rating}>
+          <div className={styles["stars-input"]}>
+            {[1, 2, 3, 4, 5].map((i) => (
+              <button
+                key={i}
+                className={styles["star-btn"]}
+                onMouseEnter={() => setHover(i)}
+                onMouseLeave={() => setHover(0)}
+                onClick={() => submitRating(selected.id_empxprod, i)}
+                
+              >
+                <span className={`${styles.star} ${i <= display ? styles.filled : ""}`}>★</span>
+              </button>
+            ))}
+          </div>
+
+          <div className={styles["avg-number"]}>
+            {count > 0
+              ? `${avg.toFixed(1)} / 5 (${count} votos)`
+              : "Sin puntuaciones"}
+          </div>
+        </div>
+      </div>
+    );
+  })()}
 </div>
 
-
+      </div>
+    </div>
+  </div>
+)}
     </>
   );
 }

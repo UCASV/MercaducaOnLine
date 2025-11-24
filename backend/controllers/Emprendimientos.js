@@ -71,3 +71,35 @@ export const ProductosPorEmprendimiento = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const EmprendimientosProximos = async (req, res) => {
+  try {
+    await poolConnect;
+    const request = pool.request();
+
+    const result = await request.query(`
+    	SELECT 
+            e.id AS id_emprendimiento,
+            e.nombre AS nombre_emprendimiento,
+            e.PuntajeProm,
+            e.estado,
+            i.codigo_imagen,
+            e.descripcion_general,
+            c.nombre AS categoria
+        FROM Emprendimiento AS e
+        LEFT JOIN Imagen AS i 
+            ON i.id = e.id_imagen
+        LEFT JOIN Categoria AS c
+            ON c.id = e.id_categoria
+        WHERE e.estado = 'Proximamente';
+    `);
+
+    res.json(result.recordset);
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({
+      error: "Error al obtener categorías",
+      details: error.message,
+    });
+  }
+};
