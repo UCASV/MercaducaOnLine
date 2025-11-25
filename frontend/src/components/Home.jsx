@@ -15,12 +15,23 @@ import styles from "./Home.module.css";
 function Home() {
   const navigate = useNavigate();
 
-  const Productos = () => {
-    navigate("/productos");
-  };
+    const Productos = () => {
+      navigate("/productos"); // te lleva a la página de productos
+    };
+    
+    const Eventos = () => {
+      navigate("/Eventos")
+    };
 
   return (
     <>
+      <html lang="es">
+        <head>
+          <meta charset="UTF-8" />
+          <link href="style.css" rel="stylesheet" />
+          <title> Mercaduca On Line</title>
+        </head>
+        <body id="inicio">
       <nav className={styles.navbarWrapper}>
         <ul className={styles.navbar}>
           <img
@@ -28,13 +39,12 @@ function Home() {
             src={mercaducachiquitob}
             alt="Logo de Mercaduca On Line"
           />
-
           <li>
             <a className={styles.elemento} href="#inicio">Inicio</a>
           </li>
 
           <li>
-            <a className={styles.elemento} href="#">Eventos</a>
+            <button className={styles.elementoBtn} onClick={Eventos}>Eventos</button>
           </li>
 
           <li>
@@ -100,19 +110,25 @@ function Home() {
           </div>
         </div>
       </section>
-
-      {/* === FOOTER === */}
-      <footer id="footer" className={styles.footer}>
-        <h3>Contáctanos</h3>
-        <p>
-          Teléfono: 123-456-7890 <br />
-          Email: mercaduca@gmail.com <br />
-          Dirección: UCA, El Salvador <br />
-          Encuéntranos en
-          <img className={styles.icono} src={instagram} alt="Instagram" />
-          <a className={styles.link} href="#">Instagram</a>
-        </p>
-      </footer>
+          <footer id="footer">
+            <h3>Contactanos</h3>
+            <p>
+              Telefono: 123-456-7890
+              <br />
+              Email: mercaduca@gmail.com
+              <br />
+              Direccion: UCA, El Salvador
+              <br />
+              Encuentranos en
+              <img className={styles.icono} src={instagram} alt="Instagram" />
+              <a className={styles.link} href="https://www.instagram.com/mercaduca/">
+                Instagram!
+              </a>
+            </p>
+          </footer>
+          <script src="script.js"></script>
+        </body>
+      </html>
     </>
   );
 }

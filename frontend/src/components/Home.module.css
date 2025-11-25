@@ -104,6 +104,13 @@ nav ul li {
   box-shadow: 3px 2px 2px #194a1442;
 }
 
+.elementoBtn:hover {
+  background-color: #b2dcae;          /* cambia el color al pasar el mouse */
+  box-shadow: -5px 3px 7px #214a1c5e; /* sombra como los <a> */
+  transition: 0.3s;
+}
+
+
 .elemento:hover {
   background-color: #b2dcae;
   transition: 0.3s;
