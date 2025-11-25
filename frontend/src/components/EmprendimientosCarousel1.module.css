@@ -58,7 +58,7 @@
     border: 1px solid #e9ecef;
     display: flex;
     flex-direction: column;
-    height: 350px; /* Altura fija para que no sean tan largos */
+    height: 350px;
     scroll-snap-align: start;
 }
 
@@ -69,18 +69,18 @@
 
 .card-img {
     position: relative;
-    height: 140px; /* Reducir altura de la imagen */
+    height: 140px; 
     overflow: hidden;
     flex-shrink: 0; /* Evitar que la imagen se encoja */
     display: flex;
-    justify-content: center; /* centra horizontalmente */
-    align-items: center;     /* centra verticalmente */
+    justify-content: center; 
+    align-items: center;     
 }
 
 .card-img img {
     width: auto;
     height: 100%;
-    object-fit: cover; /* Cambiar a cover para mejor aspecto */
+    object-fit: cover; 
     transition: transform 0.3s ease;
 }
 
@@ -93,7 +93,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Evitar desbordamiento */
+    overflow: hidden; 
     text-align: center;
 }
 
@@ -136,7 +136,7 @@
     font-size: 0.8rem;
     color: #495057;
     font-weight: 500;
-    margin-top: auto; /* Empujar hacia abajo */
+    margin-top: auto;
 }
 
 .arrow {
@@ -171,7 +171,7 @@
     right: 0;
 }
 
-/* Modal Styles */
+/* Modal styles */
 .overlay {
     position: fixed;
     top: 0;
@@ -219,8 +219,8 @@
     position: relative;
     height: 200px;
     overflow: hidden;
-    justify-content: center; /* centra horizontalmente */
-    align-items: center;     /* centra verticalmente */
+    justify-content: center;
+    align-items: center;    
     padding-top: 40px; 
     display: flex;
 }

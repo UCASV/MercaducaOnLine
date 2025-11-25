@@ -214,11 +214,27 @@ return (
 
   {/* === CATEGORIAS === */}
   <div className={styles["categories-row"]} role="tablist" aria-label="Categorías">
+      {/* === BOTÓN TODOS === */}
+  <button
+    className={`${styles["cat-btn"]} ${selectedCategory === "Todos" ? styles.active : ""}`}
+    onClick={() => setSelectedCategory("Todos")}
+    role="tab"
+    aria-selected={selectedCategory === "Todos"}
+  >
+    <span className={styles["cat-circle"]} aria-hidden="true">
+      <img
+        src={`../../Iconos/Todos.png`}
+        alt="Todos"
+        className={styles["cat-icon"]}
+      />
+    </span>
+    <small className={styles["cat-label"]}>Todos</small>
+  </button>
     {categories.map((c) => (
       <button
         key={c.id}
         className={`${styles["cat-btn"]} ${c.nombre === selectedCategory ? styles.active : ""}`}
-        onClick={() => setSelectedCategory(c.nombre)}
+        onClick={() => setSelectedCategory(prev => prev === c.nombre ? "Todos":c.nombre)}
         role="tab"
         aria-selected={c.nombre === selectedCategory}
       >

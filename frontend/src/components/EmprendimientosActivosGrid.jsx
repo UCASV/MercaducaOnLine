@@ -132,7 +132,7 @@ export default function EmprendimientosActivosGrid() {
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* Modal */}
       {selectedEmprendimiento && (
         <div className={style["overlay"]} onClick={closeExpanded}>
           <div className={style["modal"]} onClick={(e) => e.stopPropagation()}>
