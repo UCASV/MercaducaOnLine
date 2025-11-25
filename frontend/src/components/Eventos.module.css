@@ -1,11 +1,33 @@
 html {
-  scroll-behavior:smooth;
+  scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
   background-color: #ecece5;
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.eventosWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
+}
+
+.footerSection {
+  margin-top: auto;
 }
 
 nav {
@@ -14,20 +36,19 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  height: 80px;  
+  height: 80px;
   box-shadow: 3px 2px 2px #00000042;
   display: flex;
   align-items: center;
-  gap: 30px; 
-
+  gap: 30px;
 }
 .navbarWrapper {
   display: flex;
-  flex-direction: row;   
-  align-items: center;   
+  flex-direction: row;
+  align-items: center;
   gap: 20px;
   padding: 0;
-  margin-left:220px;       
+  margin-left: 220px;
   list-style: none;
 }
 
@@ -40,14 +61,12 @@ nav .mercaducaLogonav {
   margin-left: 10px;
 }
 
-
 nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   gap: 20px;
-  
 }
 
 nav ul li {
@@ -62,7 +81,6 @@ nav ul li {
   overflow-y: hidden;
   gap: 14px;
   margin-left: -6px;
-  
 }
 
 .elemento {
@@ -72,11 +90,11 @@ nav ul li {
   font-weight: bold;
   font-size: 15px;
   background: linear-gradient(to right, #4f6f4b, #669e5fa2, #4f6f4b);
-  padding: 0 8px 0 9px;  
+  padding: 0 8px 0 9px;
   border-radius: 10px;
   cursor: pointer;
   min-inline-size: 130px;
-  height: 45px;         
+  height: 45px;
   box-shadow: 3px 2px 2px #194a1442;
   display: flex;
   align-items: center;
@@ -99,7 +117,7 @@ nav ul li {
   width: 100%;
   height: 100%;
   color: inherit;
-  text-decoration: none;   /* <-- SIN LÍNEA */
+  text-decoration: none; 
   border-radius: 10px;
   text-align: center;
 }
@@ -119,11 +137,10 @@ nav ul li {
 }
 
 .elementoBtn:hover {
-  background-color: #b2dcae;          /* cambia el color al pasar el mouse */
-  box-shadow: -5px 3px 7px #214a1c5e; /* sombra como los <a> */
+  background-color: #b2dcae; 
+  box-shadow: -5px 3px 7px #214a1c5e; 
   transition: 0.3s;
 }
-
 
 .elemento:hover {
   background-color: #b2dcae;
@@ -180,47 +197,58 @@ footer {
 }
 
 .eventoCard {
-  background: #f2f2ec;           
-  border-radius: 20px;           
-  box-shadow: 2px 2px 16px rgba(0,0,0,0.18); 
+  background: #f2f2ec;
+  border-radius: 20px;
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.18);
   font-family: Helvetica;
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
   position: relative;
-  max-height: 550px;
+  max-height: 800px;
   width: 100%;
-  transition: all 0.3s ease;  
+  transition: all 0.3s ease;
 }
 
-/* Hover: efecto “elevación” */
 .eventoCard:hover {
-  transform: translateY(-5px) scale(1.02); /* se eleva y escala ligeramente */
-  box-shadow: 0 15px 25px rgba(0,0,0,0.25); 
+  transform: translateY(-5px) scale(1.02); 
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
 }
-
 
 .eventoCard h3 {
   margin: 0;
   color: #f1f8f0;
 }
 
-
 .eventoCard h4 {
   margin-top: 10px;
+}
+
+.eventoCardEmpty {
+  background: #f2f2ec;
+  border-radius: 20px;
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.18);
+  font-family: Helvetica;
+  font-weight: bold;
+  font-size: 25px;
+  height: 100px;
+  width: 100%;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
 }
 
 .panelImagen {
   background: #1a1a1a;
   align-items: center;
   justify-content: center;
-  position:absolute;
-  top:0;
+  position: absolute;
+  top: 0;
   right: 0;
   width: 100%;
   height: 100%;
 }
-
 
 .eventoImg {
   width: 100%;
@@ -231,13 +259,13 @@ footer {
 .panelVerde {
   position: relative;
   z-index: 2;
-  width: 70%;         
+  width: 70%;
   height: 100%;
   padding: 20px;
 
   background: linear-gradient(
     to right,
-    rgba(4, 1, 0, 0.8) 0%,   
+    rgba(4, 1, 0, 0.8) 0%,
     rgba(29, 17, 4, 0.6) 60%,
     rgba(0, 0, 0, 0) 100%
   );
@@ -248,46 +276,59 @@ footer {
   color: rgb(43, 28, 28);
 }
 
-
 .cardContenido {
   background: #ecece5;
   border-radius: 20px;
   margin-left: 50px;
   margin-right: 50px;
-  box-shadow: 0px 6px 20px rgba(0,0,0,0.2);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
-
 }
 
 hr {
   border: 1px solid #a6aaa7;
-} 
+}
 
 .cardContenido ul {
-  background: #f2f2ec;           
-  border-radius: 15px;           
-  box-shadow: 2px 2px 16px rgba(0,0,0,0.18); 
+  background: #f2f2ec;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.18);
   font-family: Helvetica;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;            /* espacio entre cuadros */
-  padding: 10px;        /* espacio interno para que no lleguen al borde */
-  overflow: hidden;
+  gap: 10px; 
+  padding: 10px; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
   position: relative;
-  max-height: 500px;
+  max-height: 130px;
   width: 250px;
 }
 
+.cardContenido ul::-webkit-scrollbar {
+  display: block !important;
+  width: 10px;
+}
+
+.cardContenido ul::-webkit-scrollbar-thumb {
+  background: #95b998;
+  border-radius: 10px;
+}
+
 .cardContenido li {
-  padding: 10px;            /* espacio interno */
+  padding: 10px; 
   list-style: none;
   font-size: 10px;
   font-weight: bold;
   background-color: #395436;
   border-radius: 25px;
   text-align: center;
-  color:rgb(205, 239, 201);       /* centra el texto dentro del cuadro */
+  color: rgb(205, 239, 201); 
 }

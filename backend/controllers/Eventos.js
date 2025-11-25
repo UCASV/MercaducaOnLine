@@ -24,7 +24,7 @@ export const Eventos = async (req, res) => {
     const rows = result.recordset;
 
     const eventosAgrupados = rows.reduce((acc, row) => {
-      const existente = acc.find(e => e.id === row.id);
+      const existente = acc.find((e) => e.id === row.id);
 
       if (existente) {
         existente.emprendimientos.push(row.Emprendimiento);
@@ -36,16 +36,19 @@ export const Eventos = async (req, res) => {
           descripcion: row.descripcion,
           horario_inicio: row.horario_inicio,
           horario_final: row.horario_final,
-          emprendimientos: [row.Emprendimiento]
+          emprendimientos: [row.Emprendimiento],
         });
       }
 
       return acc;
     }, []);
-    if (eventosAgrupados.length==0){
-      return res.json({mensaje: 'No hay eventos',data:[]});
+    if (eventosAgrupados.length == 0) {
+      return res.json({ mensaje: "Aun no hay eventos", data: [] });
     }
-    res.json({mensaje: "Eventos obtenidos correctamente", data: eventosAgrupados});
+    res.json({
+      mensaje: "Eventos obtenidos correctamente",
+      data: eventosAgrupados,
+    });
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({
