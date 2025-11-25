@@ -29,13 +29,13 @@
   border: none;
   cursor: pointer;
   font-weight: 600;
-  color: #b80000;
+  color: #425c3e;
   padding: 6px 8px;
   border-radius: 6px;
 }
 
 .back-btn:hover {
-  background: rgba(184, 0, 0, 0.06);
+  background: rgba(1, 95, 13, 0.06);
 }
 
 @media (max-width: 700px) {
@@ -46,7 +46,7 @@
 
 .categories-row {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   align-items: flex-start;
   justify-content: center;
   margin: 12px 0;
@@ -100,7 +100,7 @@
 }
 
 .cat-btn.active .cat-circle {
-  background: #b80000;
+  background: #50724b;
   color: #fff;
   transform: scale(1.03);
 }
@@ -131,7 +131,7 @@
 }
 
 .product-card:focus {
-  outline: 2px solid #b80000;
+  outline: 2px solid #50724b;
   outline-offset: 2px;
 }
 
@@ -177,7 +177,7 @@
 
 .price {
   font-weight: 700;
-  color: #b80000;
+  color: #4d6749;
 }
 
 .pg-overlay {
@@ -242,7 +242,7 @@
 }
 
 .btn-primary {
-  background: #b80000;
+  background: #435e3e;
   color: #fff;
   border: none;
   padding: 8px 12px;
@@ -316,7 +316,7 @@
 }
 
 .star-btn:focus {
-  outline: 2px solid rgba(184, 0, 0, 0.16);
+  outline: 2px solid rgba(6, 184, 0, 0.16);
   border-radius: 4px;
 }
 

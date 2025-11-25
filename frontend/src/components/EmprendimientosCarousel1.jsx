@@ -169,7 +169,7 @@ export default function EmprendimientosProximos() {
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* Modal */}
       {selectedEmprendimiento && (
         <div
           className={style["overlay"]}
