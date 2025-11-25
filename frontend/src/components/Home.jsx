@@ -39,7 +39,6 @@ function Home() {
             src={mercaducachiquitob}
             alt="Logo de Mercaduca On Line"
           />
-
           <li>
             <a className={styles.elemento} href="#inicio">Inicio</a>
           </li>
@@ -111,7 +110,6 @@ function Home() {
           </div>
         </div>
       </section>
-
           <footer id="footer">
             <h3>Contactanos</h3>
             <p>
@@ -122,8 +120,8 @@ function Home() {
               Direccion: UCA, El Salvador
               <br />
               Encuentranos en
-              <img class="icono" src={instagram} alt="Instagram" />
-              <a class="link" href="https://www.instagram.com/mercaduca/">
+              <img className={styles.icono} src={instagram} alt="Instagram" />
+              <a className={styles.link} href="https://www.instagram.com/mercaduca/">
                 Instagram!
               </a>
             </p>

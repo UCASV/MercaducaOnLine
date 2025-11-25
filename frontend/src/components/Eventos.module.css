@@ -18,6 +18,17 @@ nav {
   box-shadow: 3px 2px 2px #00000042;
   display: flex;
   align-items: center;
+  gap: 30px; 
+
+}
+.navbarWrapper {
+  display: flex;
+  flex-direction: row;   
+  align-items: center;   
+  gap: 20px;
+  padding: 0;
+  margin-left:220px;       
+  list-style: none;
 }
 
 ::-webkit-scrollbar {
@@ -29,12 +40,14 @@ nav .mercaducaLogonav {
   margin-left: 10px;
 }
 
+
 nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   gap: 20px;
+  
 }
 
 nav ul li {
@@ -49,6 +62,7 @@ nav ul li {
   overflow-y: hidden;
   gap: 14px;
   margin-left: -6px;
+  
 }
 
 .elemento {
@@ -148,10 +162,132 @@ footer {
 }
 
 .link {
-  text-decoration: none;
   color: #f4f4f2;
+  text-decoration: none;
 }
 
 .icono {
   width: 25px;
+}
+
+.eventosContainer {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.eventoCard {
+  background: #f2f2ec;           
+  border-radius: 20px;           
+  box-shadow: 2px 2px 16px rgba(0,0,0,0.18); 
+  font-family: Helvetica;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  position: relative;
+  max-height: 550px;
+  width: 100%;
+  transition: all 0.3s ease;  
+}
+
+/* Hover: efecto “elevación” */
+.eventoCard:hover {
+  transform: translateY(-5px) scale(1.02); /* se eleva y escala ligeramente */
+  box-shadow: 0 15px 25px rgba(0,0,0,0.25); 
+}
+
+
+.eventoCard h3 {
+  margin: 0;
+  color: #f1f8f0;
+}
+
+
+.eventoCard h4 {
+  margin-top: 10px;
+}
+
+.panelImagen {
+  background: #1a1a1a;
+  align-items: center;
+  justify-content: center;
+  position:absolute;
+  top:0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.eventoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.panelVerde {
+  position: relative;
+  z-index: 2;
+  width: 70%;         
+  height: 100%;
+  padding: 20px;
+
+  background: linear-gradient(
+    to right,
+    rgba(4, 1, 0, 0.8) 0%,   
+    rgba(29, 17, 4, 0.6) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(43, 28, 28);
+}
+
+
+.cardContenido {
+  background: #ecece5;
+  border-radius: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.2);
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+
+}
+
+hr {
+  border: 1px solid #a6aaa7;
+} 
+
+.cardContenido ul {
+  background: #f2f2ec;           
+  border-radius: 15px;           
+  box-shadow: 2px 2px 16px rgba(0,0,0,0.18); 
+  font-family: Helvetica;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;            /* espacio entre cuadros */
+  padding: 10px;        /* espacio interno para que no lleguen al borde */
+  overflow: hidden;
+  position: relative;
+  max-height: 500px;
+  width: 250px;
+}
+
+.cardContenido li {
+  padding: 10px;            /* espacio interno */
+  list-style: none;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: #395436;
+  border-radius: 25px;
+  text-align: center;
+  color:rgb(205, 239, 201);       /* centra el texto dentro del cuadro */
 }

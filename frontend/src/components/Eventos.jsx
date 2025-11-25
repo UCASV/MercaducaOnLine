@@ -1,45 +1,28 @@
-import "./Eventos.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import mercaducachiquitob from "../img/mercaducachiquitob.png";
 import instagram from "../img/instagram.png";
-
-const data = {
-  eventos: [
-    {
-      id: 1,
-      nombre: "Feria de Emprendedoras 2024",
-      fecha: "2024-05-10",
-      lugar: "Plaza Central",
-      emprendimientos: [
-        {
-          id: 101,
-          nombre: "Artesanías Luna",
-          categoria: "Artesanía",
-          ventas: 120.5,
-        },
-        { id: 102, nombre: "Dulce Hogar", categoria: "Repostería", ventas: 85 },
-        { id: 103, nombre: "EcoPack", categoria: "Sustentable", ventas: 200 },
-      ],
-    },
-    {
-      id: 2,
-      nombre: "Expo Juventud",
-      fecha: "2024-07-01",
-      lugar: "Gimnasio UCA",
-      emprendimientos: [
-        { id: 201, nombre: "TechGirls", categoria: "Tecnología", ventas: 350 },
-        { id: 202, nombre: "GreenLife", categoria: "Sustentable", ventas: 100 },
-      ],
-    },
-  ],
-};
+import styles from "./Eventos.module.css";
 
 function Evento() {}
 
 function Eventos() {
-  const [count, setCount] = useState(0);
+  const [eventos, setEventos] = useState([]);
+  const [mensaje, setMensaje] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost:5050/eventos")
+      .then((res) => res.json())
+      .then((data) => {
+        setMensaje(data.mensaje);
+        setEventos(data.data);
+      })
+      .catch((err) => {
+        setMensaje("Error al cargar eventos");
+        console.error(err);
+      });
+  }, []);
 
   const Productos = () => {
     navigate("/productos"); // te lleva a la página de productos
@@ -55,47 +38,101 @@ function Eventos() {
   return (
     <div className="Eventos">
       <nav>
-        <ul class="navbar">
-          <img
-            class="mercaducaLogonav"
-            src={mercaducachiquitob}
-            alt="Logo de Mercaduca On Line"
-          />
+        <img
+          className={styles.mercaducaLogonav}
+          src={mercaducachiquitob}
+          alt="Logo de Mercaduca On Line"
+        />
+        <ul className={styles.navbarWrapper}>
           {/* <!-- llevarlo a una zona de la pagina --> */}
-          <a class="elemento" onClick={Home}>
-            <li>Inicio</li>
-          </a>
+          <li>
+            <a className={styles.elemento} onClick={Home}>
+              Inicio
+            </a>
+          </li>
           {/* <!-- otra pagina para eventos --> */}
-          <a class="elemento" onClick={Eventos}>
-            <li id="eventos">Eventos</li>
-          </a>
-          {/* <!-- otra pagina para productos --> */}
-          <a class="elemento" onClick={Productos}>
-            <li id="productos">Productos</li>
-          </a>
+          <li>
+            <button className={styles.elementoBtn} onClick={Eventos}>
+              Eventos
+            </button>
+          </li>
+
+          <li>
+            <button className={styles.elementoBtn} onClick={Productos}>
+              Productos
+            </button>
+          </li>
           {/* <contacto footer */}
-          <a class="elemento" href="#footer">
-            <li>Contacto</li>
-          </a>
+          <li>
+            <a className={styles.elemento} href="#footer">
+              Contacto
+            </a>
+          </li>
         </ul>
       </nav>
-      <div className="Evento"></div>
-      <footer id='footer'>
-        <h3>Contactanos</h3>
-            <p>
-              Telefono: 123-456-7890
-              <br />
-              Email: mercaduca@gmail.com
-              <br />
-              Direccion: UCA, El Salvador
-              <br />
-              Encuentranos en
-              <img class="icono" src={instagram} alt="Instagram" />
-              <a class="link" href="https://www.instagram.com/mercaduca/">
-                Instagram!
-              </a>
-            </p>
-      </footer>
+      <div className={styles.eventosContainer}>
+        {eventos.length > 0 ? (
+          eventos.map((e) => (
+            <div className={styles.eventoCard}>
+              <div className={styles.panelVerde}>
+                <h3>{e.nombre}</h3>
+                <div className={styles.cardContenido}>
+                  <p>{e.descripcion}</p>
+                  <hr></hr>
+                  <p>
+                    <strong>Horario:</strong>
+                    </p>
+                    <p>{e.horario_inicio} -{" "}
+                    {e.horario_final}
+                  </p>
+                  <hr></hr>
+                  <p>
+                    <strong>Emprendimientos:</strong>
+                  </p>
+
+                  <ul>
+                    {e.emprendimientos.map((emp, i) => (
+                      <li>{emp}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className={styles.panelImagen}>
+                <img
+                  src={`http://localhost:5050/Imagenes/${e.codigo_imagen}`}
+                  className={styles.eventoImg}
+                />
+              </div>
+              
+            </div>
+          ))
+        ) : (
+          <div className={styles.eventoCardEmpty}>
+            <p>{mensaje}</p>
+          </div>
+        )}
+      </div>
+      <section>
+        <footer id="footer">
+          <h3>Contactanos</h3>
+          <p>
+            Telefono: 123-456-7890
+            <br />
+            Email: mercaduca@gmail.com
+            <br />
+            Direccion: UCA, El Salvador
+            <br />
+            Encuentranos en
+            <img className={styles.icono} src={instagram} alt="Instagram" />
+            <a
+              className={styles.link}
+              href="https://www.instagram.com/mercaduca/"
+            >
+              Instagram!
+            </a>
+          </p>
+        </footer>
+      </section>
     </div>
   );
 }
