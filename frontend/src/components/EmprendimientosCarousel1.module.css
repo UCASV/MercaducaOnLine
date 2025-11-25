@@ -3,6 +3,7 @@
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     margin: 2rem 0;
     border-radius: 15px;
+    background: #e0e1d3;
 }
 
 .emprendimientos-prox-carousel h2 {
@@ -49,7 +50,7 @@
 .emprendimiento-card {
     min-height: 300px;
     min-width: auto;
-    background: white;
+    background: rgb(235, 235, 229);
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -120,7 +121,7 @@
 .categoria {
     display: inline-block;
     background: #3f5b3b;
-    color: white;
+    color: #f1f2ed;
     padding: 0.3rem 0.7rem;
     border-radius: 10px;
     font-size: 0.7rem;
@@ -143,7 +144,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(244, 244, 241, 0.9);
     border: none;
     width: 50px;
     height: 50px;
@@ -159,7 +160,7 @@
 }
 
 .arrow:hover {
-    background: white;
+    background: #f1f1ee;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -187,7 +188,7 @@
 }
 
 .modal {
-    background: white;
+    background: rgb(235, 235, 229);
     border-radius: 20px;
     max-width: 600px;
     width: 100%;
@@ -249,7 +250,7 @@
 }
 
 .detalles {
-    background: #f8f9fa;
+    background: #f8f8f2;
     padding: 1.5rem;
     border-radius: 10px;
     border-left: 4px solid  #3f5b3b;
