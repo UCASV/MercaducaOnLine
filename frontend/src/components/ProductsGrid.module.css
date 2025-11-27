@@ -93,7 +93,7 @@
 .sort-toggle {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.14);
-  color: #ffffff;
+  color: #ecece5  ;
   padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -102,7 +102,7 @@
 
 .sort-menu {
   position: fixed;
-  background: #ffffff;
+  background: #ecece5  ;
   color: #222;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
@@ -201,7 +201,7 @@
 
 .cat-btn.active .cat-circle {
   background: #50724b;
-  color: #fff;
+  color: #ecece5  ;
   transform: scale(1.03);
 }
 
