@@ -4,12 +4,8 @@ Fecha: 22-11-2025
 
 Resumen
 - Proyecto: MercaducaOnLine
-- Propósito: Plataforma web para mostrar productos por emprendimiento, filtrado por categorías, vista expandida y sistema de puntuación.
-- Stack detectado: Frontend React (Vite en dev), Backend Node.js + Express, DB: Microsoft SQL Server (mssql).
-- Rutas locales:
-  - Raíz del repo: /home/gabriel/Documentos/Web/MercaducaOnLine
-  - Frontend: /home/gabriel/Documentos/Web/MercaducaOnLine/frontend
-  - Backend: /home/gabriel/Documentos/Web/MercaducaOnLine/backend
+- Propósito: Plataforma web para abordar la problematica relacionada con el manejo, organización y acceso a la información sobre eventos, productos y emprendimientos dentro del local de emprendedores de Mercaduca.
+- Stack: Frontend React (Vite en dev), Backend Node.js + Express, DB: Microsoft SQL Server (mssql).
 
 Requisitos
 - Node.js >= 18 recomendado
@@ -89,28 +85,6 @@ Instalación y ejecución (local)
   cd .../backend
   npm start
 - Abrir: http://localhost:5050
-
-Comandos útiles
-- Ver puertos: ss -ltnp | grep -E ':5050|:5173'
-- Probar endpoint: curl http://localhost:5050/productosMasVendidos
-- Ver logs nodemon: salen en el terminal donde ejecutaste npm start
-
-Seguridad y variables
-- Crear .env en backend con credenciales DB y secrets (no subir a git)
-- Usar CORS de forma restrictiva en producción
-- Validar y sanitizar entradas en backend
-
-Testing y calidad
-- No se detectaron tests en package.json.
-- Recomendado:
-  - Frontend: Jest + React Testing Library
-  - Backend: Jest + Supertest
-  - Añadir ESLint y pre-commit hooks
-
-Despliegue sugerido
-- Crear Dockerfile para backend; servir build del frontend
-- Usar PM2 o systemd para proceso Node
-- Configurar reverse proxy (nginx) y SSL
 
 1) GET /productos
 - Descripción: devuelve listado general de productos (todos).
@@ -230,6 +204,4 @@ Comprobaciones y comandos útiles
   xdg-open http://localhost:5050
 
 Historia del documento
-- v0.1 — 22-11-2025 
-
-Fin del manual.
+- v0.2 — 23-11-2025 
