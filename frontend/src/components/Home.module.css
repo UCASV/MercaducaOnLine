@@ -195,7 +195,7 @@ nav ul li {
 
 footer {
   background-color: #3f5b3b;
-  padding: 10px;
+  padding: 25px 10px;
   font-family: Helvetica;
   font-weight: bold;
   font-size: 15px;
@@ -204,11 +204,55 @@ footer {
   overflow: hidden;
 }
 
-.link {
-  text-decoration: none;
-  color: #f4f4f2;
+.footerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  padding: 2rem 1.5rem
+}
+
+.footerSection {
+  min-width: 200px;
+}
+
+.footerTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footerSmallText {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.instagramRow {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 .icono {
   width: 25px;
+  margin-bottom: 5px;
+}
+
+.link {
+  text-decoration: none;
+  color: #f4f4f2;
+  font-weight: bold;
+}
+
+.footerDivider {
+  width: 2px;
+  background-color: #ffffff33;
+  height: 100%;
+  align-self: stretch;
 }

@@ -128,22 +128,39 @@ function Home() {
           </div>
         </div>
       </section>
-          <footer id="footer">
-            <h3>Contáctanos</h3>
-            <p>
-              Teléfono: 123-456-7890
-              <br />
-              Email: mercaduca@gmail.com
-              <br />
-              Dirección: UCA, El Salvador
-              <br />
-              Encuéntranos en  
+      <footer clasName={styles.footer}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerSection}>
+            <h3 className={styles.footerTitle}>¡Contáctanos!</h3>
+
+            <p>Teléfono: 123-456-7890</p>
+            <p>Email: mercaduca@gmail.com</p>
+
+            <div className={styles.instagramRow}>
               <img className={styles.icono} src={instagram} alt="Instagram" />
               <a className={styles.link} href="https://www.instagram.com/mercaduca/">
-                  Instagram!
+                Instagram Oficial
               </a>
+            </div>
+          </div>
+
+          {/*Linea divisora*/}
+          <div className={styles.footerDivider}></div>
+
+          <div className={styles.footerSection}>
+            <h3 className={styles.footerTitle}>Ubicación y Horarios</h3>
+            
+            <p className={styles.footerSmallText}>
+              Bulevar Los Próceres, Antiguo Cuscatlán, La Libertad, El Salvador, Centroamérica.
             </p>
-          </footer>
+            <p className={styles.footerSmallText}>
+              Lunes a Jueves: 9:00 AM - 5:30 PM <br />
+              Viernes: 9:00 AM - 1:00 PM
+            </p>
+          </div>
+        </div>
+
+      </footer>
     </>
   );
 }
