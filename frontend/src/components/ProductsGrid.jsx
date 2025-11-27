@@ -5,11 +5,18 @@ import { useNavigate } from "react-router-dom";
 
 import styles from  "./ProductsGrid.module.css";
 import filtroIcon from "../img/filtro.png";
+import eventosStyles from "./Eventos.module.css";
+import homeStyles from "./Home.module.css";
+import mercaducachiquitob from "../img/mercaducachiquitob.png";
+import instagram from "../img/instagram.png";
 
 
 export default function ProductsGrid() {
     const navigate = useNavigate();
     const { categoria } = useParams();  
+  const goHome = () => navigate('/');
+  const goEventos = () => navigate('/Eventos');
+  const goProductos = () => navigate('/productos');
 
     const [selectedCategory, setSelectedCategory] = useState("Todos");
     const [products, setProducts] = useState([]);
@@ -234,20 +241,39 @@ const filtered = selectedCategory === "Todos"
   }
 
   return (
-   <section className={styles["products-grid-section"]}>
-  <header className={styles["pg-page-header"]}>
-    <div className={styles["pg-header-inner"]}>
-      <button
-        type="button"
-        className={styles["back-btn"]}
-        onClick={() => window.history.back()}
-        aria-label="Pagina principal"
-      >
-        ← Inicio
-      </button>
-      <h1 className={styles["pg-header-title"]}>Productos</h1>
-    </div>
-  </header>
+  <div className={eventosStyles.eventosWrapper}>
+    <main className={eventosStyles.mainContent}>
+      <nav>
+        <img
+          className={eventosStyles.mercaducaLogonav}
+          src={mercaducachiquitob}
+          alt="Logo de Mercaduca On Line"
+        />
+        <ul className={eventosStyles.navbarWrapper}>
+          <li>
+            <a className={eventosStyles.elemento} onClick={goHome}>
+              Inicio
+            </a>
+          </li>
+          <li>
+            <button className={eventosStyles.elementoBtn} onClick={goEventos}>
+              Eventos
+            </button>
+          </li>
+          <li>
+            <button className={eventosStyles.elementoBtn} onClick={goProductos}>
+              Productos
+            </button>
+          </li>
+          <li>
+            <a className={eventosStyles.elemento} href="#footer">
+              Contacto
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section className={styles["products-grid-section"]}>
 
   {/* === CATEGORIAS === */}
   <div className={styles["categories-row"]} role="tablist" aria-label="Categorías">
@@ -431,7 +457,41 @@ const filtered = selectedCategory === "Todos"
       </div>
     </div>
   )}
-</section>
+      </section>
+    </main>
 
-    );
+    {/* FOOTER (copiado de Home/Eventos) */}
+    <footer id="footer" className={homeStyles.footer}>
+      <div className={homeStyles.footerContent}>
+
+        {/* CONTACTO */}
+        <div className={homeStyles.footerSection}>
+          <h3 className={homeStyles.footerTitle}>¡Contáctanos!</h3>
+          <p>Teléfono: 123-456-7890</p>
+          <p>Email: mercaduca@gmail.com</p>
+
+          <div className={homeStyles.instagramRow}>
+            <img className={homeStyles.icono} src={instagram} alt="Instagram" />
+            <a className={homeStyles.link} href="https://www.instagram.com/mercaduca/">
+              Instagram Oficial
+            </a>
+          </div>
+        </div>
+
+        {/* UBICACIÓN */}
+        <div className={homeStyles.footerSection}>
+          <h3 className={homeStyles.footerTitle}>Ubicación y Horarios</h3>
+          <p className={homeStyles.footerSmallText}>
+            Bulevar Los Próceres, Antiguo Cuscatlán, La Libertad, El Salvador.
+          </p>
+          <p className={homeStyles.footerSmallText}>
+            Lunes a Jueves: 9 AM - 5:30 PM <br />
+            Viernes: 9 AM - 1 PM
+          </p>
+        </div>
+
+      </div>
+    </footer>
+  </div>
+  );
 }

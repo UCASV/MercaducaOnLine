@@ -11,7 +11,6 @@ import ProductsCarousel from "./ProductsCarousel.jsx";
 import EmprendimientosCarousel from "./EmprendimientosCarousel1.jsx";
 import EmprendimientosActivosGrid from "./EmprendimientosActivosGrid.jsx";
 
-// IMPORTACIÓN CORRECTA DEL CSS MODULE
 import styles from "./Home.module.css";
 
 function Home() {
