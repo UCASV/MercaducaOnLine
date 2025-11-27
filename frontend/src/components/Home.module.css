@@ -27,6 +27,7 @@ nav {
 nav .mercaducaLogonav {
   height: 45px;
   margin-left: 10px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 nav ul {
@@ -49,6 +50,58 @@ nav ul li {
   overflow-y: hidden;
   gap: 14px;
   margin-left: -6px;
+  align-items: center;
+  transition: all 0.35s ease-in-out;
+}
+
+.navbarWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(90deg, #3f5b3b 50%, #466b42, #395436);
+  padding: 8px;
+  box-shadow: 3px 2px 2px #00000042;
+  transition: all 0.35s ease-in-out;
+}
+
+.noLogo .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  overflow-x: auto;
+  padding-left: 0;
+}
+
+.withLogo .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  overflow-x: auto;
+  padding-left: 8px;
+}
+
+.logoItem {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.mercaducaLogonav {
+  height: 45px;
+  transition: all 0.35s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.logoItem {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.withLogo .logoItem {
+  opacity: 1;
 }
 
 .elemento {
@@ -121,6 +174,10 @@ nav ul li {
   background: linear-gradient(90deg, #4d814579 50%, #214a1c5e 90%);
   height: fit-content;
   box-shadow: 2px 2px 3px #00000042;
+}
+
+.contenedorLogoPequeño {
+  justify-content: center;
 }
 
 .mercaducaLogoPrincipal {

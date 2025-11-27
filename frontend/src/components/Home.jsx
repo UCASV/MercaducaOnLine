@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import mercadoucapneg from "../img/mercaducaopng.png";
 import mercaducachiquitob from "../img/mercaducachiquitob.png";
@@ -23,22 +23,39 @@ function Home() {
       navigate("/Eventos")
     };
 
+    const [showSmallLogo, setShowSmallLogo] = useState(false);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 150) {
+          setShowSmallLogo(true);
+        } else {
+          setShowSmallLogo(false);
+        } 
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
   return (
     <>
-      <html lang="es">
-        <head>
-          <meta charset="UTF-8" />
-          <link href="style.css" rel="stylesheet" />
-          <title> Mercaduca On Line</title>
-        </head>
-        <body id="inicio">
-      <nav className={styles.navbarWrapper}>
+      <nav
+        className={`$ {styles.navbarWrapper} ${
+          showSmallLogo ? styles.withLogo : styles.contenedorLogoPequeño
+        }`}
+      >
         <ul className={styles.navbar}>
-          <img
-            className={styles.mercaducaLogonav}
-            src={mercaducachiquitob}
-            alt="Logo de Mercaduca On Line"
-          />
+          {showSmallLogo && (
+            <li className={styles.logoItem}>
+              <img
+                className={styles.mercaducaLogonav}
+                src={mercaducachiquitob}
+                alt="Logo Pequeño de Mercaduca On Line"
+              />
+            </li>
+          )}
+                
           <li>
             <a className={styles.elemento} href="#inicio">Inicio</a>
           </li>
@@ -78,6 +95,7 @@ function Home() {
       </nav>
 
       {/* === CONTENIDO PRINCIPAL === */}
+      
       <section id="inicio" className={styles.mainSection}>
         <div className={styles.contenedorLogo}>
           <img
@@ -111,24 +129,21 @@ function Home() {
         </div>
       </section>
           <footer id="footer">
-            <h3>Contactanos</h3>
+            <h3>Contáctanos</h3>
             <p>
-              Telefono: 123-456-7890
+              Teléfono: 123-456-7890
               <br />
               Email: mercaduca@gmail.com
               <br />
-              Direccion: UCA, El Salvador
+              Dirección: UCA, El Salvador
               <br />
-              Encuentranos en
+              Encuéntranos en  
               <img className={styles.icono} src={instagram} alt="Instagram" />
               <a className={styles.link} href="https://www.instagram.com/mercaduca/">
-                Instagram!
+                  Instagram!
               </a>
             </p>
           </footer>
-          <script src="script.js"></script>
-        </body>
-      </html>
     </>
   );
 }
