@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios"
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import styles from  "./ProductsGrid.module.css";
+import filtroIcon from "../img/filtro.png";
 
 
 export default function ProductsGrid() {
@@ -19,6 +20,11 @@ export default function ProductsGrid() {
     const [hover, setHover] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [sortOpen, setSortOpen] = useState(false);
+    const [sortOption, setSortOption] = useState(null);
+    const [menuPos, setMenuPos] = useState({ top: 0, left: 0 });
+    const sortToggleRef = useRef(null);
+
 
     useEffect(() => {
   const fetchCategorias = async () => {
@@ -73,6 +79,8 @@ useEffect(() => {
             ? `http://localhost:5050/productos`
             : `http://localhost:5050/productos/categoria/${selectedCategory}`;
 
+        // NOTE: filters can be appended to the request later. For now we keep the base URL
+        // and use `activeFilters` to modify behavior when backend support is added.
         const res = await axios.get(url);
         setProducts(res.data);
             
@@ -116,6 +124,22 @@ useEffect(() => {
 
   fetchProductos();
 }, [selectedCategory]);
+
+  function applySort(option) {
+    setSortOption(option);
+    setSortOpen(false);
+  }
+
+  function handleSortToggle() {
+    if (!sortOpen && sortToggleRef.current) {
+      const rect = sortToggleRef.current.getBoundingClientRect();
+      setMenuPos({
+        top: rect.bottom + 8,
+        left: rect.right - 180
+      });
+    }
+    setSortOpen(prev => !prev);
+  }
 
 
     function getRatingInfo(productId) {
@@ -196,7 +220,20 @@ const filtered = selectedCategory === "Todos"
 }
 
 
-return (
+  // prepare displayed products applying sorting if requested
+  let displayed = filtered.slice();
+  if (sortOption) {
+    const opt = sortOption;
+    displayed.sort((a, b) => {
+      if (opt === "precio-desc") return (Number(b.precio) || 0) - (Number(a.precio) || 0);
+      if (opt === "precio-asc") return (Number(a.precio) || 0) - (Number(b.precio) || 0);
+      if (opt === "az") return (a.nombre_producto || "").localeCompare(b.nombre_producto || "");
+      if (opt === "za") return (b.nombre_producto || "").localeCompare(a.nombre_producto || "");
+      return 0;
+    });
+  }
+
+  return (
    <section className={styles["products-grid-section"]}>
   <header className={styles["pg-page-header"]}>
     <div className={styles["pg-header-inner"]}>
@@ -251,9 +288,44 @@ return (
     ))}
   </div>
 
+  {/* === FILTRO Y ORDEN (barra verde) === */}
+  <div className={styles["filters-row"]} aria-label="Filtros">
+    <div style={{flex:1}} />
+    <div className={styles["filters-control"]}>
+      <img src={filtroIcon} alt="Filtro" className={styles["filter-icon"]} />
+      <div className={styles["sort-control"]}>
+        <button
+          ref={sortToggleRef}
+          type="button"
+          className={styles["sort-toggle"]}
+          onClick={handleSortToggle}
+          aria-expanded={sortOpen}
+        >
+          {sortOption === "precio-desc" ? "Precio más alto" : sortOption === "precio-asc" ? "Precio más bajo" : sortOption === "az" ? "A-Z" : sortOption === "za" ? "Z-A" : "Ordenar por"}
+          &nbsp;▾
+        </button>
+        {sortOpen && (
+          <ul 
+            className={styles["sort-menu"]} 
+            role="menu"
+            style={{
+              top: `${menuPos.top}px`,
+              left: `${menuPos.left}px`
+            }}
+          >
+            <li role="menuitem"><button onClick={() => applySort("precio-desc")}>Precio más alto</button></li>
+            <li role="menuitem"><button onClick={() => applySort("precio-asc")}>Precio más bajo</button></li>
+            <li role="menuitem"><button onClick={() => applySort("az")}>A-Z</button></li>
+            <li role="menuitem"><button onClick={() => applySort("za")}>Z-A</button></li>
+          </ul>
+        )}
+      </div>
+    </div>
+  </div>
+
   {/* === PRODUCTOS GRID === */}
   <div className={styles["products-grid-main"]} aria-live="polite">
-    {filtered.map((p) => (
+    {displayed.map((p) => (
       <article
         key={p.id_empxprod}
         className={`${styles["product-card"]} ${styles["grid-card"]}`}
@@ -283,7 +355,7 @@ return (
       </article>
     ))}
 
-    {filtered.length === 0 && (
+    {displayed.length === 0 && (
       <div className={styles["no-results"]}>No hay productos en esta categoría.</div>
     )}
   </div>

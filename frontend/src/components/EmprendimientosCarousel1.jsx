@@ -115,7 +115,7 @@ export default function EmprendimientosProximos() {
   return (
     <>
       <div className={style["emprendimientos-prox-carousel"]}>
-        <h2 className={style["proximos-title"]}>Próximos Emprendimientos</h2>
+        <h2 className={style.title}>Próximos Emprendimientos</h2>
 
         <div className={style["carousel-wrapper"]}>
           <button

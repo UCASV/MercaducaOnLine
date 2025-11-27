@@ -99,7 +99,7 @@ export default function EmprendimientosActivosGrid() {
     <>
       <div className={style["emprendimientos-activos-grid"]}>
         <div className={style["grid-header"]}>
-          <h2>Nuestros Emprendimientos</h2>
+          <h2 className={style.title}>Nuestros Emprendimientos</h2>
           <p>Marcas que crecen con nosotros</p>
         </div>
 
