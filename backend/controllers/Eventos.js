@@ -52,7 +52,7 @@ export const Eventos = async (req, res) => {
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({
-      error: "Error al obtener categorías",
+      error: "Error al obtener eventos",
       details: error.message,
     });
   }
