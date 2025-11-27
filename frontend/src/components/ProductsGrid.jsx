@@ -352,7 +352,7 @@ return (
           </div>
 
           <div className={styles.actions}>
-            <button className={styles["btn-primary"]}>Más información</button>
+            {/* <button className={styles["btn-primary"]}>Más información</button> */}
             <button className={styles["btn-secondary"]} onClick={closeExpanded}>Cerrar</button>
           </div>
         </div>
