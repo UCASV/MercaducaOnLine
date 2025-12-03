@@ -99,7 +99,7 @@ nav ul li {
 .elemento {
   opacity: 0.95;
   color: #f4f4f2;
-  font-family: Helvetica;
+  font-family: 'Inter';
   font-weight: bold;
   font-size: 15px;
   background: linear-gradient(to right, #4f6f4b, #669e5fa2, #4f6f4b);
@@ -163,7 +163,7 @@ nav ul li {
 }
 
 .contenedorLogo {
-  background-color: #ecece5;
+  background-color: #d8dac8;
   height: fit-content;
   box-shadow: 2px 2px 3px #00000042;
 }
@@ -188,10 +188,10 @@ nav ul li {
 footer {
   background-color: #3f5b3b;
   padding: 25px 10px;
-  font-family: Helvetica;
+  font-family: 'Inter';
   font-weight: bold;
   font-size: 15px;
-  color: #f4f4f2;
+  color: #e6e8da;
   text-align: center;
   overflow: hidden;
 }
@@ -250,11 +250,41 @@ footer {
 }
 
 .homeBackground {
+  position: relative;
+  z-index: 1;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
   background-image: url('../img/fondo.jpg');
-  background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  filter: blur(2px);
+
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+.homeBackground .backgroundImage{
+ position: fixed;
+  inset: 0;
+
+  background-image: url('../img/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+
+  filter: blur(6px);
+  transform: scale(1.1);
+
+  z-index: -1;
 }
 
 .bannerWindow {
@@ -271,25 +301,27 @@ footer {
 .bannerOverlay {
   padding: 3rem 4rem;
   background: rgba(63, 91, 59, 0.94);
-  color: white;
+  color: #e6e8da;
   border-radius: 20px;
   backdrop-filter: none;
   text-align: center;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 8px rgba(1, 29, 3, 0.628);
   width: min(1100px, 92%);
   box-sizing: border-box;
 }
 
 .bannerOverlay h1 {
   /* Tipografía principal del banner: usar 'Moldie' si está disponible */
-  font-family: 'Moldie', Georgia, 'Times New Roman', serif;
+    font-family: "IBM Plex Serif", serif;
   font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
-  line-height: 1.05;
-  margin: 0 0 0.75rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+  line-height: 1.1;
+  margin: 0 0 0.2rem;
+  font-weight: 1200;
+  letter-spacing: 2px;
   text-transform: none;
+  font-style: normal;
 }
+
 
 .bannerOverlay p {
   font-size: clamp(1rem, 2.2vw + 0.5rem, 1.25rem);
@@ -309,7 +341,9 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #e6e8da;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   padding: 20px;
 }
+
+

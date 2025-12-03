@@ -152,7 +152,7 @@ useEffect(() => {
   return (
     <>
       <div className={styles["products-carousel"]}>
-        <h2 className={styles.title}>Top 1 de cada categoría</h2>
+        <h2 className={styles.title}>Producto mejor valorado de cada categoría</h2>
 
         <div className={styles["carousel-wrapper"]}>
           <button className={styles.arrow} onClick={() => scrollByWidth(-1)}>

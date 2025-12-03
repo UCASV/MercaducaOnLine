@@ -14,7 +14,7 @@
 .grid-header h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #000000;
+    color: #091b01;
     margin-bottom: 0.5rem;
     text-transform: none;
     letter-spacing: 0;
@@ -23,7 +23,7 @@
 .title {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #000000;
+    color: #091b01;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -264,7 +264,7 @@
 }
 
 .detalle-item span {
-    color: #000000;
+    color: #091b01;
     font-size: 0.95rem;
 }
 

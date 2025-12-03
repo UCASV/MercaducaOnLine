@@ -31,9 +31,10 @@ function Home() {
 
   return (
     <>
+    <div className={styles.background}></div>
       <div
-        className={styles.homeBackground}
-        style={{ backgroundImage: `url(${fondo})` }}
+      className={styles.homeBackground}
+
       >
         {/* NAVBAR */}
         <nav
