@@ -39,6 +39,16 @@ function Eventos() {
         console.error(err);
       });
   }, []);
+  
+    const goEventos = () => {
+      if (location.pathname === "/Eventos") {
+        // Ya estoy en la página → subir arriba
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        // Ir a Eventos por primera vez
+        navigate("/Eventos");
+      }
+    };
 
   const Productos = () => {
     navigate("/productos"); // te lleva a la página de productos
@@ -69,7 +79,7 @@ function Eventos() {
             </li>
             {/* <!-- otra pagina para eventos --> */}
             <li>
-              <button className={styles.elementoBtn} onClick={Eventos}>
+              <button className={styles.elementoBtn} onClick={goEventos} href="#nav">
                 Eventos
               </button>
             </li>

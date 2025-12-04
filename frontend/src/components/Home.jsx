@@ -6,7 +6,6 @@ import mercaducachiquitob from "../img/mercaducachiquitob.png";
 import instagram from "../img/instagram.png";
 import fondo from "../img/fondo.jpg";
 
-
 import ProductsCarousel from "./ProductsCarousel.jsx";
 import EmprendimientosCarousel from "./EmprendimientosCarousel1.jsx";
 import EmprendimientosActivosGrid from "./EmprendimientosActivosGrid.jsx";
@@ -31,11 +30,8 @@ function Home() {
 
   return (
     <>
-    <div className={styles.background}></div>
-      <div
-      className={styles.homeBackground}
-
-      >
+      <div className={styles.background}></div>
+      <div className={styles.homeBackground}>
         {/* NAVBAR */}
         <nav
           className={`${styles.navbarWrapper} ${
@@ -44,7 +40,11 @@ function Home() {
         >
           <ul className={styles.navbar}>
             {showSmallLogo && (
-              <li className={styles.logoItem}>
+              <li
+                className={`${styles.logoItem} ${
+                  showSmallLogo ? styles.visible : styles.hidden
+                }`}
+              >
                 <img
                   className={styles.mercaducaLogonav}
                   src={mercaducachiquitob}
@@ -53,19 +53,46 @@ function Home() {
               </li>
             )}
 
-            <li><a className={styles.elemento} href="#inicio">Inicio</a></li>
-            <li><button className={styles.elementoBtn} onClick={Eventos}>Eventos</button></li>
-            <li><button className={styles.elementoBtn} onClick={Productos}>Productos</button></li>
-            <li><a className={styles.elemento} href="#contenedorEmprendimientos">Emprendimientos</a></li>
-            <li><a className={styles.elemento} href="#contenedorMasVendidos">Más vendidos</a></li>
-            <li><a className={styles.elemento} href="#contenedorProximos">Próximos</a></li>
-            <li><a className={styles.elemento} href="#footer">Contacto</a></li>
+            <li>
+              <a className={styles.elemento} href="#inicio">
+                Inicio
+              </a>
+            </li>
+            <li>
+              <button className={styles.elementoBtn} onClick={Eventos}>
+                Eventos
+              </button>
+            </li>
+            <li>
+              <button className={styles.elementoBtn} onClick={Productos}>
+                Productos
+              </button>
+            </li>
+            <li>
+              <a className={styles.elemento} href="#contenedorEmprendimientos">
+                Emprendimientos
+              </a>
+            </li>
+            <li>
+              <a className={styles.elemento} href="#contenedorMasVendidos">
+                Más vendidos
+              </a>
+            </li>
+            <li>
+              <a className={styles.elemento} href="#contenedorProximos">
+                Próximos
+              </a>
+            </li>
+            <li>
+              <a className={styles.elemento} href="#footer">
+                Contacto
+              </a>
+            </li>
           </ul>
         </nav>
 
         {/* SECCIÓN PRINCIPAL */}
         <section id="inicio" className={styles.mainSection}>
-
           {/* LOGO PRINCIPAL */}
           <div className={styles.contenedorLogo}>
             <img
@@ -77,23 +104,28 @@ function Home() {
 
           {/* CONTENIDO */}
           <div className={styles.contenedorPrincipal}>
-
             {/* BANNER 1 */}
             <section className={styles.bannerWindow}>
               <div className={styles.bannerOverlay}>
                 <h1>Bienvenidos a Mercaduca On Line</h1>
-                <p className={styles.parrafo}>Un esfuerzo del Centro de Orientación Profesional, <br />
-                  ¡para el desarrollo de emprendimientos locales UCA!</p>
+                <p className={styles.parrafo}>
+                  Un esfuerzo del Centro de Orientación Profesional, <br />
+                  ¡para el desarrollo de emprendimientos locales UCA!
+                </p>
               </div>
             </section>
 
             {/* EMPRENDIMIENTOS ACTIVOS */}
-            <section id="contenedorEmprendimientos" style={{ marginBottom: "3rem" }}>
+            <section
+              id="contenedorEmprendimientos"
+              className={styles.seccion}
+              style={{ marginBottom: "3rem" }}
+            >
               <EmprendimientosActivosGrid />
             </section>
 
             {/* MÁS VENDIDOS */}
-            <div id="contenedorMasVendidos">
+            <div id="contenedorMasVendidos" className={styles.seccion}>
               <ProductsCarousel />
             </div>
 
@@ -101,22 +133,22 @@ function Home() {
             <section className={styles.bannerWindow}>
               <div className={styles.bannerOverlay}>
                 <h1>¿Preparado para lo que se viene?</h1>
-                <p className={styles.parrafo}>¡Actívate para recibir las siguientes novedades!</p>
+                <p className={styles.parrafo}>
+                  ¡Actívate para recibir las siguientes novedades!
+                </p>
               </div>
             </section>
 
             {/* EMPRENDIMIENTOS PRÓXIMOS */}
-            <div id="contenedorProximos">
+            <div id="contenedorProximos" className={styles.seccion}>
               <EmprendimientosCarousel />
             </div>
-
           </div>
         </section>
 
         {/* FOOTER */}
         <footer id="footer" className={styles.footer}>
           <div className={styles.footerContent}>
-
             {/* CONTACTO */}
             <div className={styles.footerSection}>
               <h3 className={styles.footerTitle}>¡Contáctanos!</h3>
@@ -125,7 +157,10 @@ function Home() {
 
               <div className={styles.instagramRow}>
                 <img className={styles.icono} src={instagram} alt="Instagram" />
-                <a className={styles.link} href="https://www.instagram.com/mercaduca/">
+                <a
+                  className={styles.link}
+                  href="https://www.instagram.com/mercaduca/"
+                >
                   Instagram Oficial
                 </a>
               </div>
@@ -135,17 +170,16 @@ function Home() {
             <div className={styles.footerSection}>
               <h3 className={styles.footerTitle}>Ubicación y Horarios</h3>
               <p className={styles.footerSmallText}>
-                Bulevar Los Próceres, Antiguo Cuscatlán, La Libertad, El Salvador.
+                Bulevar Los Próceres, Antiguo Cuscatlán, La Libertad, El
+                Salvador.
               </p>
               <p className={styles.footerSmallText}>
                 Lunes a Jueves: 9 AM - 5:30 PM <br />
                 Viernes: 9 AM - 1 PM
               </p>
             </div>
-
           </div>
         </footer>
-
       </div>
     </>
   );

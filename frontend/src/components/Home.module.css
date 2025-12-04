@@ -1,5 +1,6 @@
 html {
   scroll-behavior:smooth;
+  scroll-padding-top: 40px;
 }
 
 body {
@@ -30,6 +31,10 @@ nav .mercaducaLogonav {
   transition: opacity 0.55s cubic-bezier(.2,.9,.2,1), transform 0.55s cubic-bezier(.2,.9,.2,1);
   will-change: opacity, transform;
 }
+ nav .mercaducaLogonav::after{
+  transition: all 0.35s ease-in-out;
+ }
+
 
 nav ul {
   list-style: none;
@@ -84,11 +89,32 @@ nav ul li {
   will-change: opacity, transform;
 }
 
-.mercaducaLogonav {
+nav .mercaducaLogonav {
   height: 45px;
-  transition: all 0.45s cubic-bezier(.2,.9,.2,1);
+  animation: fadeIn 1.2s ease forwards; 
+  opacity: 0; 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.9);
 }
 
 .withLogo .logoItem {
@@ -345,5 +371,3 @@ footer {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   padding: 20px;
 }
-
-

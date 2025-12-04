@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  background-color: #ecece5;
+  background-color: #dee0d4;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -265,7 +265,7 @@ footer {
 
   background: linear-gradient(
     to right,
-    rgba(4, 1, 0, 0.8) 0%,
+    rgba(28, 42, 0, 0.484) 0%,
     rgba(29, 17, 4, 0.6) 60%,
     rgba(0, 0, 0, 0) 100%
   );
@@ -277,7 +277,7 @@ footer {
 }
 
 .cardContenido {
-  background: #ecece5;
+  background: #e3e3d8e4;
   border-radius: 20px;
   margin-left: 50px;
   margin-right: 50px;
@@ -293,7 +293,7 @@ hr {
 }
 
 .cardContenido ul {
-  background: #f2f2ec;
+  background: #e1e1d764;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-top-right-radius: 10px;
